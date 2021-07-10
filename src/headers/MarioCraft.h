@@ -2,10 +2,11 @@
 
 #include "libs.h"
 
-// General Functions
-
 //ENUMERATIONS
-enum shader_enum { SHADER_CORE_PROGRAM = 0 }; // static Shader
+enum shader_enum { 
+  SHADER_CORE_PROGRAM = 0, 
+  SHADER_SKYBOX = 1 
+};
 
 class MarioCraft {
 public:
@@ -22,7 +23,6 @@ public:
   // Functions
   void updateDeltaTime();
   void updateInput();
-  void updateModels();
   void update();
   void render();
   void updateMouseInput();
@@ -62,6 +62,8 @@ private:
   // Lighting
   glm::vec3 lightPosition;
   glm::vec3 lightDirection;
+  // Skybox
+  Skybox* skybox;
   // Models
   ModelManager* models;
 
@@ -82,13 +84,13 @@ private:
   void initWindow(const char* title, bool resizable);
   void initGLAD();
   void initOpenGLOptions();
-  void initMatrices();
   void initShaders();
   void initLights();
-  void initUniforms();
+  void initSkybox();
   void initModels();
 
   void renderLights();
+  void renderSkybox();
   void renderModels();
 
 };

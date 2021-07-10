@@ -19,6 +19,7 @@
 
 #include "camera.h"
 #include "shader_m.h"
+#include "Skybox.h"
 #include "Model3D.h"
 #include "DymanicModel.h"
 #include "ModelManager.h"

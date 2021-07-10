@@ -38,20 +38,29 @@ MarioCraft::MarioCraft(const char* title, int WINDOW_WIDTH, int WINDOW_HEIGHT, b
   this->initGLAD();
   this->initOpenGLOptions();
 
-  this->initMatrices();
   this->initShaders();
-  this->initUniforms();
+  this->initSkybox();
 
   this->initModels();
 }
 
 MarioCraft::~MarioCraft() {
+  // Terminamos los recursos para el Skybox
+  skybox->Terminate();
+
   glfwDestroyWindow(this->window);
   glfwTerminate();
+  
 
   // Destruir los Shaders
   for (size_t i = 0; i < this->shaders.size(); i++)
     delete this->shaders[i];
+}
+
+// Static functions
+// framebuffer_resize_callback establece el tamaño de la ventana
+void MarioCraft::framebuffer_resize_callback(GLFWwindow* window, int fbW, int fbH) {
+  glViewport(0, 0, fbW, fbH);
 }
 
 //Accessor
@@ -133,11 +142,6 @@ void MarioCraft::updateInput(){
   this->updateMouseInput();
 }
 
-// updateModels Actualiza cada uno de los modelos que tienen animaciones
-void MarioCraft::updateModels() {
-}
-
-
 // update realiza los cambios necesarios antes de renderizar
 void MarioCraft::update() {
   this->lastFrame = SDL_GetTicks();
@@ -156,8 +160,10 @@ void MarioCraft::render() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   // Update the uniforms
+  update();
 
   // Render models
+  renderSkybox();
   renderLights();
   renderModels();
 
@@ -230,15 +236,15 @@ void MarioCraft::initOpenGLOptions() {
 }
 
 //
-void MarioCraft::initMatrices() {
-  this->ViewMatrix = glm::mat4(1.f);
-  this->ProjectionMatrix = glm::mat4(1.f);
+void MarioCraft::initShaders() {
+  // staticShader
+  this->shaders.push_back(
+    new Shader("Shaders/shader_Lights.vs", "Shaders/shader_Lights.fs")
+  );
+  // skyboxShader
+  this->shaders.push_back(new Shader("Shaders/skybox.vs", "Shaders/skybox.fs"));
 }
 
-//
-void MarioCraft::initShaders() {
-  this->shaders.push_back(new Shader("Shaders/shader_Lights.vs", "Shaders/shader_Lights.fs"));
-}
 
 // initLights inicializa los vectores para las luces
 void MarioCraft::initLights(){
@@ -247,22 +253,19 @@ void MarioCraft::initLights(){
 
 }
 
-//
-void MarioCraft::initUniforms() {
-  int indice = shader_enum::SHADER_CORE_PROGRAM;
-  this->shaders[indice]->use();
-  this->shaders[indice]->setMat4("view", ViewMatrix);
-  this->shaders[indice]->setMat4("projection", ProjectionMatrix);
+// initSkybox inicializa el cubo que generará el cielo del escenario
+void MarioCraft::initSkybox() {
+  vector<std::string> faces {
+    "resources/skybox/right.jpg",
+    "resources/skybox/left.jpg",
+    "resources/skybox/top.jpg",
+    "resources/skybox/bottom.jpg",
+    "resources/skybox/front.jpg",
+    "resources/skybox/back.jpg"
+  };
 
-  
+  skybox = new Skybox(faces);
 }
-
-// Static functions
-// framebuffer_resize_callback establece el tamaño de la ventana
-void MarioCraft::framebuffer_resize_callback(GLFWwindow* window, int fbW, int fbH) {
-  glViewport(0, 0, fbW, fbH);
-}
-
 
 
 /*
@@ -279,7 +282,6 @@ void MarioCraft::renderLights() {
   shaders[indice]->setVec3("dirLight.ambient", glm::vec3(1.0f, 1.0f, 1.0f)); // Tonalidad del ambiente, modifica las caras menos iluminadas
   shaders[indice]->setVec3("dirLight.diffuse", glm::vec3(0.0f, 0.0f, 0.0f)); // Color principal de la fuente de luz
   shaders[indice]->setVec3("dirLight.specular", glm::vec3(1.0f, 1.0f, 1.0f));  // Brillo
-
 
   // Fuentes de luz posicionales
   shaders[indice]->setVec3("pointLight[0].position", lightPosition);
@@ -303,12 +305,33 @@ void MarioCraft::renderLights() {
   glm::mat4 model = glm::mat4(1.0f);
   glm::mat4 tmp = glm::mat4(1.0f);
   // view/projection transformations
-  glm::mat4 projection = glm::perspective(glm::radians(camera->Zoom), (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1f, 10000.0f);
-  glm::mat4 view = camera->GetViewMatrix();
-  shaders[indice]->setMat4("projection", projection);
-  shaders[indice]->setMat4("view", view);
+  ProjectionMatrix = glm::perspective(
+    glm::radians(camera->Zoom), 
+    (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, 
+    0.1f, 
+    10000.0f
+  );
+  ViewMatrix = camera->GetViewMatrix();
+  shaders[indice]->setMat4("projection", ProjectionMatrix);
+  shaders[indice]->setMat4("view", ViewMatrix);
 }
 
+// renderSkybox renderiza el cielo
+void MarioCraft::renderSkybox() {
+  shaders[shader_enum::SHADER_SKYBOX]->use();
+  shaders[shader_enum::SHADER_SKYBOX]->setInt("skybox", 0);
+  skybox->Draw(
+    *shaders[shader_enum::SHADER_SKYBOX], 
+    ViewMatrix, 
+    ProjectionMatrix, 
+    *camera
+  );
+}
+
+// renderModels renderiza todos los modelos creados
+void MarioCraft::renderModels() {
+  models->renderModels();
+}
 
 /*
 * Añadir Modelos Aquí
@@ -343,10 +366,4 @@ void MarioCraft::initModels() {
   //-------------------------------------------------------------------------
   DynamicModel * tmpModelAnim;
 
-}
-
-
-// renderModels renderiza todos los modelos creados
-void MarioCraft::renderModels() {
-  models->renderModels();
 }
