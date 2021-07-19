@@ -7,6 +7,17 @@ Debug/*
 # Prerequisites
 *.d
 
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+
+# Thumbnails
+._*
+
 # Compiled Object files
 *.slo
 *.lo
