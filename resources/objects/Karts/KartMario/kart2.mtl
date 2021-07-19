@@ -1,0 +1,41 @@
+# Blender MTL File: 'None'
+# Material Count: 3
+
+newmtl mt_Kart_Mario_Tire_S
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Ka Item_Kart_Mario_Tire_S.png
+map_d F2_Item_Kart_Mario_Tire_S.png
+map_Kd F2_Item_Kart_Mario_Tire_S.png
+
+newmtl mt_kart_Mario_S
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Ka F2_Item_Kart_Mario_Kart_S.png
+map_d F2_Item_Kart_Mario_Kart_S.png
+map_Kd F2_Item_Kart_Mario_Kart_S.png
+
+newmtl mt_mario
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Ka Item_Kart_Mario_Body_S.png
+map_d F2_Item_Kart_Mario_Body_S.png
+map_Kd F2_Item_Kart_Mario_Body_S.png

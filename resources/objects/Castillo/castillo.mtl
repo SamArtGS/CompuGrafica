@@ -1,0 +1,106 @@
+# Blender MTL File: 'None'
+# Material Count: 8
+
+newmtl Material.004
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd color.png
+map_Ka color.png
+map_d color.png
+
+newmtl Material.005
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd copy.png
+map_Ka copy.png
+map_d copy.png
+
+newmtl mt_PeachCastle.001
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd PeachCastle.png
+map_Ka PeachCastle.png
+map_d PeachCastle.png
+
+newmtl mt_PeachCastle.003_B_nohara_PeachCastle.png.000_B_nohara_Pe.001
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd B_nohara_PeachCastle.png
+map_Ka B_nohara_PeachCastle.png
+map_d B_nohara_PeachCastle.png
+
+newmtl mt_PeachCastle.003_B_nohara_PeachCastle.png.000_bricks.png.001
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd bricks.png
+map_Ka bricks.png
+map_d bricks.png
+
+newmtl mt_PeachCastle.003_B_nohara_PeachCastle.png.000_door.png.001
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd door.png
+map_Ka door.png
+map_d door.png
+
+newmtl mt_PeachCastle.003_B_nohara_PeachCastle.png.001
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd B_nohara_PeachCastle.png
+map_Ka B_nohara_PeachCastle.png
+map_d B_nohara_PeachCastle.png
+
+newmtl mt_PeachCastle.003_bricks.png.001
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd bricks.png
+map_Ka bricks.png
+map_d bricks.png
