@@ -14,9 +14,9 @@ private:
   glm::mat4 model;
 public:
   Model3D(string);
-  Model3D Init(glm::mat4);
-  Model3D Rotate(float, float, float, float);
-  Model3D Translate(float, float, float);
-  Model3D Scale(float, float, float);
+  Model3D* Init(glm::mat4);
+  Model3D* Rotate(float, float, float, float);
+  Model3D* Translate(float, float, float);
+  Model3D* Scale(float, float, float);
   void Draw();
 };

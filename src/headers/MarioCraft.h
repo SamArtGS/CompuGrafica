@@ -47,15 +47,15 @@ private:
   // Variables
     // Window
   GLFWwindow* window;
-  int WINDOW_WIDTH = 800;
-  int WINDOW_HEIGHT = 600;
+  int WINDOW_WIDTH = 500;
+  int WINDOW_HEIGHT = 400;
   int frameBufferWidth = 0;
   int frameBufferHeight = 0;
   // Matrices
   glm::mat4 ViewMatrix;		// Matriz de vista
   glm::mat4 ProjectionMatrix; // Matriz de Proyeccion
   // Timing
-  double deltaTime = 0.0;
+  double deltaTime = 0.1;
   double lastFrame = 0.0;
   const int FPS = 60;
   const int LOOP_TIME = 1000 / FPS;

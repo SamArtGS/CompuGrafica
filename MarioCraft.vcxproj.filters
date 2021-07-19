@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de encabezado\Objetos">
+      <UniqueIdentifier>{f61fee74-e340-4b9e-b1ad-20343e1e74af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Objetos">
+      <UniqueIdentifier>{948088ba-14b8-4df2-8990-9192fb031827}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\anim.fs">
@@ -83,6 +89,9 @@
     <ClInclude Include="src\headers\StaticModel.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="src\headers\Kart.h">
+      <Filter>Archivos de encabezado\Objetos</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\sources\glad.c">
@@ -102,6 +111,9 @@
     </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sources\Kart.cpp">
+      <Filter>Archivos de origen\Objetos</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

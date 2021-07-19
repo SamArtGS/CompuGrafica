@@ -20,7 +20,7 @@ MarioCraft::MarioCraft(const char* title, int WINDOW_WIDTH, int WINDOW_HEIGHT, b
   this->frameBufferHeight = this->WINDOW_HEIGHT;
 
   // Init Camara
-  this->camera = new Camera(glm::vec3(0.0f, 10.0f, 90.0f));
+  this->camera = new Camera(glm::vec3(0.0f, 50.0f, 90.0f));
 
   this->lastMouseX = 0.0;
   this->lastMouseY = 0.0;
@@ -237,10 +237,12 @@ void MarioCraft::initOpenGLOptions() {
 
 //
 void MarioCraft::initShaders() {
-  // staticShader
+    // staticShader
+
   this->shaders.push_back(
-    new Shader("Shaders/shader_Lights.vs", "Shaders/shader_Lights.fs")
+      new Shader("Shaders/shader_Lights.vs", "Shaders/shader_Lights.fs")
   );
+  
   // skyboxShader
   this->shaders.push_back(new Shader("Shaders/skybox.vs", "Shaders/skybox.fs"));
 }
@@ -291,7 +293,7 @@ void MarioCraft::renderLights() {
   shaders[indice]->setFloat("pointLight[0].constant", 0.08f);
   shaders[indice]->setFloat("pointLight[0].linear", 0.009f); // Que tanto viaja la luz en el ambiente
   shaders[indice]->setFloat("pointLight[0].quadratic", 0.032f); // Intencidad de la fuente de luz
-
+  
   shaders[indice]->setVec3("pointLight[1].position", glm::vec3(-80.0, 0.0f, 0.0f));
   shaders[indice]->setVec3("pointLight[1].ambient", glm::vec3(1.0f, 0.0f, 0.0f));
   shaders[indice]->setVec3("pointLight[1].diffuse", glm::vec3(1.0f, 0.0f, 0.0f));
@@ -299,7 +301,6 @@ void MarioCraft::renderLights() {
   shaders[indice]->setFloat("pointLight[1].constant", 1.0f);
   shaders[indice]->setFloat("pointLight[1].linear", 0.009f);
   shaders[indice]->setFloat("pointLight[1].quadratic", 0.032f);
-
   shaders[indice]->setFloat("material_shininess", 32.0f);
 
   glm::mat4 model = glm::mat4(1.0f);
@@ -333,37 +334,85 @@ void MarioCraft::renderModels() {
   models->renderModels();
 }
 
-/*
-* Añadir Modelos Aquí
-*/
-// initModels inicializa todos los modelos.
 void MarioCraft::initModels() {
-  models = new ModelManager();
-  StaticModel *tmpStaticModel;
-  
-  // Perro
-  //------------------------------------------------------
-  tmpStaticModel = new StaticModel("resources/objects/Dog/Dog.obj");
-  tmpStaticModel->Init(glm::mat4(1.f))
-    .Translate(0.f, 0.f, 0.f)
-    .Rotate(45.f, 0.f, 1.f, 0.f)
-    .Scale(.5f, .5f, 1.f)
-    .Draw();
-  models->addModel(tmpStaticModel);
 
-  // Casa Brujas
-  //------------------------------------------------------
-  tmpStaticModel = new StaticModel("resources/objects/CasaBrujas/CasaBrujas.obj");
-  tmpStaticModel->Init(glm::mat4(1.0f))
-    .Translate(250.0f, 0.0f, -10.0f)
-    .Rotate(-90.0f, 0.0f, 1.0f, 0.0f)
-    .Scale(4.0f, 4.0f, 4.0f)
-    .Draw();
-  models->addModel(tmpStaticModel);
+    models = new ModelManager();
+    float altura = 3.5f;
+    float coordenadasCasasToad[12][2] = {
+        //Tres a lado de la carretera, alineados, a lado de las gallinas
+        {-100.0f, -40.0f}, 
+        {-100.0f, -10.0f},
+        {-100.0f,  20.0f},
 
-  //-------------------------------------------------------------------------
-  // MODELOS CON ANIMACIONES
-  //-------------------------------------------------------------------------
+        //2 en medio de la carretera
+        {-20.0f, -85.0f},
+        {-50.0f, -35.0f},
+
+        //Mini Villa de Champiñones 6 juntos en cuadrícula 3x2
+        { 40.0f, -70.0f},
+        { 40.0f, -30.0f},
+        { 40.0f,  10.0f},
+        { 80.0f, -70.0f},
+        { 80.0f, -30.0f},
+        { 80.0f,  10.0f},
+
+        { 0.0f,  0.0f}
+    };
+
+    float coordenadasCasasMaicra1[2][2] = {
+        {170.0f, 170.0f},
+        { 80.0f, 50.0f}
+    };
+
+    float coordenadasCasasMaicra2[2][2] = {
+        {-170.0f, 270.0f},
+        {-60.0f,  100.0f}
+    };
+
+    //Escenario -------------------------------------------
+    //
+    StaticModel* escenario = new StaticModel("resources/objects/Escenario/Mariocraft.obj");
+    escenario
+        ->Init(glm::mat4(1.0f))
+        ->Scale(15.0f, 15.0f, 15.0f);
+    models->addModel(escenario);
+
+    //Castillo -------------------------------------------
+    //
+    StaticModel* castillo = new StaticModel("resources/objects/Castillo/castillo.obj");
+    castillo
+        ->Init(glm::mat4(1.0f))
+        ->Translate(10.0f, 44.0f, -238.0f)
+        ->Scale(50.0f, 50.0f, 50.0f);
+    models->addModel(castillo);
+
+    // CasasTOAD -----------------------------------------
+    //
+
+    for (int i = 0; i < 12; i++) {
+        StaticModel* casaToad = new StaticModel("resources/objects/CasaToad/casatoad.obj");
+        casaToad
+            ->Init(glm::mat4(1.0f))
+            ->Translate(coordenadasCasasToad[i][0], altura, coordenadasCasasToad[i][1])
+            ->Scale(10.0f, 10.0f, 10.0f);
+        models->addModel(casaToad);
+    }
+
+    // Casas Minecraft // Buscar modelos más ligeros o quitar un poconón de vértices, mucha RAM
+    /* for (int i = 0; i < 1; i++) {
+        StaticModel* casa = new StaticModel("resources/objects/CasaMinecraft1/casa.obj");
+        casa
+            ->Init(glm::mat4(1.0f))
+            ->Translate(coordenadasCasasMaicra1[i][0], 30.0f, coordenadasCasasMaicra1[i][1])
+            ->Scale(2.0f, 2.0f, 2.0f);
+        models->addModel(casa);
+    }*/
+
+    // Arboles
+
+    //Antorchas
+
+
   DynamicModel * tmpModelAnim;
 
 }

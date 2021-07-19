@@ -170,6 +170,7 @@
   <ItemGroup>
     <ClInclude Include="src\headers\camera.h" />
     <ClInclude Include="src\headers\DymanicModel.h" />
+    <ClInclude Include="src\headers\Kart.h" />
     <ClInclude Include="src\headers\libs.h" />
     <ClInclude Include="src\headers\MarioCraft.h" />
     <ClInclude Include="src\headers\Model.h" />
@@ -180,6 +181,7 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\sources\glad.c" />
+    <ClCompile Include="src\sources\Kart.cpp" />
     <ClCompile Include="src\sources\MarioCraft.cpp" />
     <ClCompile Include="src\sources\Model.cpp" />
     <ClCompile Include="src\sources\Model3D.cpp" />
