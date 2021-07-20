@@ -5,6 +5,9 @@
 #define SDL_MAIN_HANDLED
 #include <SDL.h>
 #include "StaticModel.h"
+#include "DymanicModel.h"
+#include "Kart.h"
+
 
 // Static declarations
 vector<Shader*> MarioCraft::shaders;
@@ -413,6 +416,17 @@ void MarioCraft::initModels() {
     //Antorchas
 
 
-  DynamicModel * tmpModelAnim;
+
+    //Kart1
+
+    DynamicModel* kart1 = new Kart("resources/objects/Karts/Kart1/kart1.obj");
+    kart1
+        ->Init(glm::mat4(1.0f))
+        ->Translate(30.0f, 30.0f, -180.0f)
+        ->Scale(10.0f, 10.0f, 10.0f);
+    models->addModel(kart1,DYNAMIC);
+
+    D
+
 
 }

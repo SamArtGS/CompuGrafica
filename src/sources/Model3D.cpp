@@ -18,7 +18,7 @@ Model3D* Model3D::Init(glm::mat4 modelInit) {
 }
 
 Model3D* Model3D::Rotate(float ang, float rX, float rY, float rZ) {
-  model = glm::rotate(model, glm::radians(45.0f), glm::vec3(rX, rY, rZ));
+  model = glm::rotate(model, glm::radians(ang), glm::vec3(rX, rY, rZ));
   return this;
 }
 

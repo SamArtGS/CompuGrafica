@@ -11,8 +11,8 @@ using  namespace std;
 class Model3D : public Model {
 private:
   string rutaObj;
-  glm::mat4 model;
 public:
+  glm::mat4 model;
   Model3D(string);
   Model3D* Init(glm::mat4);
   Model3D* Rotate(float, float, float, float);
