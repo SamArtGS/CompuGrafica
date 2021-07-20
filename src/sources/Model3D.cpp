@@ -11,9 +11,6 @@ Model3D::Model3D(string rutaObj) : Model(rutaObj) {
 
 Model3D* Model3D::Init(glm::mat4 modelInit) {
   model = modelInit;
-  int indice = shader_enum::SHADER_CORE_PROGRAM;
-  MarioCraft::shaders[indice]->setMat4("model", model);
-  Model::Draw(*MarioCraft::shaders[indice]);
   return this;
 }
 
@@ -35,7 +32,7 @@ Model3D* Model3D::Scale(float sX, float xY, float sZ) {
 void Model3D::Draw() {
   int indice = shader_enum::SHADER_CORE_PROGRAM;
   MarioCraft::shaders[indice]->setMat4("model", model);
-  Model::Draw(*MarioCraft::shaders[indice]);
+  this->Model::Draw(*MarioCraft::shaders[0]);
 }
 
 

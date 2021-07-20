@@ -11,15 +11,17 @@ void Kart::animate() {
 	
 
 	//model = glm::rotate(model, glm::radians(posicionInicial[0]), glm::vec3(0.0f, 1.0f, 0.0f));
-	cout << glm::to_string(model) << " \n\n";
+	//cout << glm::to_string(model) << " \n\n";
 	this->posicionInicial[0] += 0.001f;
 	this->posicionInicial[1] += 0.01f;
 	this->posicionInicial[2] += 0.01f;
 
-	Model::Draw(*MarioCraft::shaders[indice]);
+	//Model::Draw(*MarioCraft::shaders[indice]); // No mover, porque se ve bonito el carrito 
 
 }
 
 void Kart::keyboardInput() {
 	
+}
+void Kart::renderModels() {
 }

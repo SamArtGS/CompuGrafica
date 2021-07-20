@@ -177,6 +177,7 @@
     <ClInclude Include="src\headers\Model3D.h" />
     <ClInclude Include="src\headers\ModelManager.h" />
     <ClInclude Include="src\headers\StaticModel.h" />
+    <ClInclude Include="src\headers\Toad.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
@@ -186,6 +187,7 @@
     <ClCompile Include="src\sources\Model.cpp" />
     <ClCompile Include="src\sources\Model3D.cpp" />
     <ClCompile Include="src\sources\ModelManager.cpp" />
+    <ClCompile Include="src\sources\Toad.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

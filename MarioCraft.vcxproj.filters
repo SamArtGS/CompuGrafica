@@ -92,6 +92,9 @@
     <ClInclude Include="src\headers\Kart.h">
       <Filter>Archivos de encabezado\Objetos</Filter>
     </ClInclude>
+    <ClInclude Include="src\headers\Toad.h">
+      <Filter>Archivos de encabezado\Objetos</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\sources\glad.c">
@@ -113,6 +116,9 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="src\sources\Kart.cpp">
+      <Filter>Archivos de origen\Objetos</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sources\Toad.cpp">
       <Filter>Archivos de origen\Objetos</Filter>
     </ClCompile>
   </ItemGroup>

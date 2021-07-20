@@ -7,6 +7,7 @@
 #include "StaticModel.h"
 #include "DymanicModel.h"
 #include "Kart.h"
+#include "Toad.h"
 
 
 // Static declarations
@@ -416,17 +417,14 @@ void MarioCraft::initModels() {
     //Antorchas
 
 
-
-    //Kart1
+    // Kart1 ------------------------------------------------------------------
 
     DynamicModel* kart1 = new Kart("resources/objects/Karts/Kart1/kart1.obj");
-    kart1
-        ->Init(glm::mat4(1.0f))
-        ->Translate(30.0f, 30.0f, -180.0f)
-        ->Scale(10.0f, 10.0f, 10.0f);
-    models->addModel(kart1,DYNAMIC);
-
-    D
+    models->addModel(kart1, DYNAMIC);
 
 
+    // TOAD -------------------------------------------------------------------
+    //
+    DynamicModel* toad = new Toad("resources/objects/Toad");
+    models->addModel(toad, DYNAMIC);    
 }

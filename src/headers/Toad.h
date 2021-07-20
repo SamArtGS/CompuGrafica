@@ -1,22 +1,36 @@
 #pragma once
-#include <vector>
 #include "Model3D.h"
-#include "StaticModel.h"
 #include "DymanicModel.h"
 
 class Toad : public DynamicModel {
 private:
-    //float distancias[4] = { 1,1,1,1 };
-    //float posicionInicial[3] = { 30.0f, 30.0f, -180.0f };
+  Model3D* cabeza;
+  Model3D* brazoIzq;
+  Model3D* brazoDer;
+  Model3D* cuerpo;
+  Model3D* pieIzq;
+  Model3D* pieDer;
+  enum class Desplazar { 
+    INICIO, 
+    AVANZAR_1, VUELTA_1, 
+    AVANZAR_2, VUELTA_2, 
+    AVANZAR_3, VUELTA_3, 
+    AVANZAR_4, VUELTA_4 
+  };
+  enum class Brincar {
+    INICIO, ESTADO_1, ESTADO_2, ESTADO_3, ESTADO_4
+  };
+  Desplazar estadoDesplazar = Desplazar::INICIO;
+  Brincar estadoBrincar = Brincar::INICIO;
+  float rX, rY, rZ;
+  float desplazamientoX, desplazamientoY, desplazamientoZ;
+  float anguloGiro;
+  float anguloBrazosPiernas;
 public:
-    DynamicModel* cabeza = new Model3D("resources/objects/Karts/Kart1/kart1.obj");
-    DynamicModel* brazoIzq = new DynamicModel("resources/objects/Karts/Kart1/kart1.obj");
-    DynamicModel* brazoDer = new DynamicModel("resources/objects/Karts/Kart1/kart1.obj");
-    DynamicModel* cuerpo = new DynamicModel("resources/objects/Karts/Kart1/kart1.obj");
-    DynamicModel* pieIzq = new DynamicModel("resources/objects/Karts/Kart1/kart1.obj");
-    DynamicModel* pieDer = new DynamicModel("resources/objects/Karts/Kart1/kart1.obj");
-    Toad(string rutaObj) : DynamicModel(rutaObj) {};
+    Toad(string rutaObj);
     void animate();
     void keyboardInput();
+    void renderModels();
+    void update();
 };
 
