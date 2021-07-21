@@ -119,6 +119,10 @@ void Kart::keyboardInput() {
 	}
 }
 
+void Kart::renderModels() {
+	cout << "FUCK YOU";
+}
+
 Model3D* Kart::Translate(float tX, float tY, float tZ){
 	Model3D* extraModel = __super::Translate(tX,tY,tZ);
 	int posAux[3] = { tX,tY,tZ };

@@ -46,6 +46,8 @@ class Kart: public DynamicModel{
         Kart(string rutaObj) : DynamicModel(rutaObj) { };
         void animate();
         void keyboardInput();
+        void renderModels();
         virtual Model3D* Translate(float tX, float tY, float tZ);
+
 };
 
