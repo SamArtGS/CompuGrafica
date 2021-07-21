@@ -401,7 +401,7 @@ void MarioCraft::initModels() {
     }
 
     // Casas Minecraft // Buscar modelos más ligeros o quitar un poconón de vértices, mucha RAM
-    /* for (int i = 0; i < 1; i++) {
+    /*for (int i = 0; i < 1; i++) {
         StaticModel* casa = new StaticModel("resources/objects/CasaMinecraft1/casa.obj");
         casa
             ->Init(glm::mat4(1.0f))
@@ -411,12 +411,27 @@ void MarioCraft::initModels() {
     }*/
 
     // Arboles
+    StaticModel* steve = new StaticModel("resources/objects/Steve/steve.obj");
+    steve
+        ->Init(glm::mat4(1.0f))
+        ->Translate(170.0f, 30.0f, 170.0f)
+        ->Scale(3.0f, 3.0f, 3.0f);
+    models->addModel(steve);
 
-    //Antorchas
 
+    StaticModel* peach = new StaticModel("resources/objects/Peach/Peach.obj");
+    peach
+        ->Init(glm::mat4(1.0f))
+        ->Translate(70.0f, 30.0f, 140.0f)
+        ->Scale(0.5f, 0.5f, 0.5f);
+    models->addModel(peach);
 
-
-    //Kart1
+    StaticModel* dragon = new StaticModel("resources/objects/Dragon/dragon.obj");
+    dragon
+        ->Init(glm::mat4(1.0f))
+        ->Translate(7.0f, 30.0f, 140.0f)
+        ->Scale(5.0f, 5.0f, 5.0f);
+    models->addModel(dragon);
 
     Kart* kart1 = new Kart("resources/objects/Karts/Kart1/kart1.obj");
     kart1

@@ -2,7 +2,7 @@ Wavefront OBJ material file
 # Material Count: 1
 
 newmtl dragon
-Ns 0 0 0
+Ns 0
 Ka 0.2 0.2 0.2
 Kd 1 1 1
 Ks 0 0 0
