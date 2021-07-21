@@ -120,7 +120,7 @@ void Kart::keyboardInput() {
 }
 
 void Kart::renderModels() {
-	cout << "FUCK YOU";
+	
 }
 
 Model3D* Kart::Translate(float tX, float tY, float tZ){
