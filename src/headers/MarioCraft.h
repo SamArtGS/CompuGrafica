@@ -11,7 +11,7 @@ enum shader_enum {
 class MarioCraft {
 public:
   // Constructors / Destructors
-  MarioCraft(const char* title, int WINDOW_WIDTH, int WINDOW_HEIGHT, bool resizable);
+  MarioCraft(const char* title, const char* icono, int WINDOW_WIDTH, int WINDOW_HEIGHT, bool resizable);
   virtual ~MarioCraft();
 
   // Accessors
@@ -81,7 +81,7 @@ private:
   // Private functions
   void getResolution();
   void initGLFW();
-  void initWindow(const char* title, bool resizable);
+  void initWindow(const char* title, const char* icono, bool resizable);
   void initGLAD();
   void initOpenGLOptions();
   void initShaders();

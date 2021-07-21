@@ -3,7 +3,7 @@
 #include "MarioCraft.h"
 
 int main() {
-  MarioCraft marioCraft("Mario Craft", 0, 0, true);
+  MarioCraft marioCraft("Mario Craft", "resources/icono.png", 0, 0, true);
 
   while (!marioCraft.getWindowShouldClose()) {
     marioCraft.update();

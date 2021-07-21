@@ -15,7 +15,7 @@ vector<Shader*> MarioCraft::shaders;
 Camera* MarioCraft::camera;
 
 // Constructors / Destructors
-MarioCraft::MarioCraft(const char* title, int WINDOW_WIDTH, int WINDOW_HEIGHT, bool resizable)
+MarioCraft::MarioCraft(const char* title, const char* icono, int WINDOW_WIDTH, int WINDOW_HEIGHT, bool resizable)
   : WINDOW_WIDTH(WINDOW_WIDTH), WINDOW_HEIGHT(WINDOW_HEIGHT) {
 
   // Init Variables
@@ -38,7 +38,7 @@ MarioCraft::MarioCraft(const char* title, int WINDOW_WIDTH, int WINDOW_HEIGHT, b
   // Validate the screen resolution
   if (this->WINDOW_WIDTH <= 0 || this->WINDOW_WIDTH < 0) this->getResolution();
 
-  this->initWindow(title, resizable);
+  this->initWindow(title, icono, resizable);
   this->initGLAD();
   this->initOpenGLOptions();
 
@@ -202,7 +202,7 @@ void MarioCraft::getResolution() {
 }
 
 // 
-void MarioCraft::initWindow(const char* title, bool resizable) {
+void MarioCraft::initWindow(const char* title, const char* icono, bool resizable) {
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   // OpenGL 3.3
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -211,6 +211,10 @@ void MarioCraft::initWindow(const char* title, bool resizable) {
 
   this->window = glfwCreateWindow(this->WINDOW_WIDTH, this->WINDOW_HEIGHT, title, NULL, NULL);
 
+  GLFWimage images[1];
+  images[0].pixels = stbi_load(icono, &images[0].width, &images[0].height, 0, 4);
+  glfwSetWindowIcon(window, 2, images);
+  stbi_image_free(images[0].pixels);
   if (this->window == nullptr){
     std::cout << "ERROR::GLFW_WINDOW_INIT_FAILED" << "\n";
     glfwTerminate();
