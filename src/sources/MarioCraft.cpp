@@ -12,6 +12,7 @@
 // Static declarations
 vector<Shader*> MarioCraft::shaders;
 Camera* MarioCraft::camera;
+GLFWwindow* MarioCraft::window;
 
 // Constructors / Destructors
 MarioCraft::MarioCraft(const char* title, int WINDOW_WIDTH, int WINDOW_HEIGHT, bool resizable)
@@ -341,7 +342,7 @@ void MarioCraft::initModels() {
 
     models = new ModelManager();
     float altura = 3.5f;
-    float coordenadasCasasToad[12][2] = {
+    float coordenadasCasasToad[11][2] = {
         //Tres a lado de la carretera, alineados, a lado de las gallinas
         {-100.0f, -40.0f}, 
         {-100.0f, -10.0f},
@@ -357,9 +358,7 @@ void MarioCraft::initModels() {
         { 40.0f,  10.0f},
         { 80.0f, -70.0f},
         { 80.0f, -30.0f},
-        { 80.0f,  10.0f},
-
-        { 0.0f,  0.0f}
+        { 80.0f,  10.0f}
     };
 
     float coordenadasCasasMaicra1[2][2] = {
@@ -385,14 +384,14 @@ void MarioCraft::initModels() {
     StaticModel* castillo = new StaticModel("resources/objects/Castillo/castillo.obj");
     castillo
         ->Init(glm::mat4(1.0f))
-        ->Translate(10.0f, 44.0f, -238.0f)
-        ->Scale(50.0f, 50.0f, 50.0f);
+        ->Translate(15.0f, 54.0f, -245.0f)
+        ->Scale(65.0f, 65.0f, 65.0f);
     models->addModel(castillo);
 
     // CasasTOAD -----------------------------------------
     //
 
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < 11; i++) {
         StaticModel* casaToad = new StaticModel("resources/objects/CasaToad/casatoad.obj");
         casaToad
             ->Init(glm::mat4(1.0f))
@@ -419,14 +418,35 @@ void MarioCraft::initModels() {
 
     //Kart1
 
-    DynamicModel* kart1 = new Kart("resources/objects/Karts/Kart1/kart1.obj");
+    Kart* kart1 = new Kart("resources/objects/Karts/Kart1/kart1.obj");
     kart1
         ->Init(glm::mat4(1.0f))
-        ->Translate(30.0f, 30.0f, -180.0f)
-        ->Scale(10.0f, 10.0f, 10.0f);
-    models->addModel(kart1,DYNAMIC);
+        ->Translate(13.0f, 12.5f, 120.0f)
+        ->Rotate(172.0f,0.0f,1.0f, 0.0f)
+        ->Scale(1.0f, 1.0f, 1.0f);
+    kart1->velocidad = 0.5f;
+    models->addModel(kart1, DYNAMIC);
 
-    D
+
+
+    Kart* kart2 = new Kart("resources/objects/Karts/Kart2/kart2.obj");
+    kart2
+        ->Init(glm::mat4(1.0f))
+        ->Translate(10.0f, 12.5f, 120.0f)
+        ->Rotate(172.0f, 0.0f, 1.0f, 0.0f)
+        ->Scale(1.0f, 1.0f, 1.0f);
+    kart2->velocidad = 0.3f;
+    models->addModel(kart2, DYNAMIC);
+
+
+    Kart* kart3 = new Kart("resources/objects/Karts/Kart3/kart3.obj");
+    kart3
+        ->Init(glm::mat4(1.0f))
+        ->Translate(7.0f, 12.5f, 120.0f)
+        ->Rotate(172.0f, 0.0f, 1.0f, 0.0f)
+        ->Scale(1.0f, 1.0f, 1.0f);
+    kart3->velocidad = 0.7f;
+    models->addModel(kart3, DYNAMIC);
 
 
 }

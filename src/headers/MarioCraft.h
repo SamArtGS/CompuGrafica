@@ -27,7 +27,7 @@ public:
   void render();
   void updateMouseInput();
   void updateKeyboardInput();
-
+  static GLFWwindow* window;
 
   // Shaders
   static std::vector<Shader*> shaders;
@@ -46,7 +46,7 @@ private:
   static Camera* camera;
   // Variables
     // Window
-  GLFWwindow* window;
+  
   int WINDOW_WIDTH = 500;
   int WINDOW_HEIGHT = 400;
   int frameBufferWidth = 0;
