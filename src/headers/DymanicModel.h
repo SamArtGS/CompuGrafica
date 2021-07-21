@@ -7,5 +7,6 @@ public:
   DynamicModel(string rutaObj) : Model3D(rutaObj) {};
   virtual void keyboardInput() = 0;
   virtual void animate() = 0;
+  virtual void renderModels() = 0;
 };
 

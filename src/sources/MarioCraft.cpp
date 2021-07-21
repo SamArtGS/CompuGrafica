@@ -7,6 +7,7 @@
 #include "StaticModel.h"
 #include "DymanicModel.h"
 #include "Kart.h"
+#include "Toad.h"
 
 
 // Static declarations
@@ -15,7 +16,7 @@ Camera* MarioCraft::camera;
 GLFWwindow* MarioCraft::window;
 
 // Constructors / Destructors
-MarioCraft::MarioCraft(const char* title, int WINDOW_WIDTH, int WINDOW_HEIGHT, bool resizable)
+MarioCraft::MarioCraft(const char* title, const char* icono, int WINDOW_WIDTH, int WINDOW_HEIGHT, bool resizable)
   : WINDOW_WIDTH(WINDOW_WIDTH), WINDOW_HEIGHT(WINDOW_HEIGHT) {
 
   // Init Variables
@@ -38,7 +39,7 @@ MarioCraft::MarioCraft(const char* title, int WINDOW_WIDTH, int WINDOW_HEIGHT, b
   // Validate the screen resolution
   if (this->WINDOW_WIDTH <= 0 || this->WINDOW_WIDTH < 0) this->getResolution();
 
-  this->initWindow(title, resizable);
+  this->initWindow(title, icono, resizable);
   this->initGLAD();
   this->initOpenGLOptions();
 
@@ -62,7 +63,7 @@ MarioCraft::~MarioCraft() {
 }
 
 // Static functions
-// framebuffer_resize_callback establece el tamaño de la ventana
+// framebuffer_resize_callback establece el tamaï¿½o de la ventana
 void MarioCraft::framebuffer_resize_callback(GLFWwindow* window, int fbW, int fbH) {
   glViewport(0, 0, fbW, fbH);
 }
@@ -194,7 +195,7 @@ void MarioCraft::initGLFW() {
   }
 }
 
-// getResolution obtiene las dimesiones máximas de la pantalla
+// getResolution obtiene las dimesiones mï¿½ximas de la pantalla
 void MarioCraft::getResolution() {
   const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
   this->WINDOW_WIDTH = mode->width;
@@ -202,7 +203,7 @@ void MarioCraft::getResolution() {
 }
 
 // 
-void MarioCraft::initWindow(const char* title, bool resizable) {
+void MarioCraft::initWindow(const char* title, const char* icono, bool resizable) {
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   // OpenGL 3.3
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -211,6 +212,10 @@ void MarioCraft::initWindow(const char* title, bool resizable) {
 
   this->window = glfwCreateWindow(this->WINDOW_WIDTH, this->WINDOW_HEIGHT, title, NULL, NULL);
 
+  GLFWimage images[1];
+  images[0].pixels = stbi_load(icono, &images[0].width, &images[0].height, 0, 4);
+  glfwSetWindowIcon(window, 2, images);
+  stbi_image_free(images[0].pixels);
   if (this->window == nullptr){
     std::cout << "ERROR::GLFW_WINDOW_INIT_FAILED" << "\n";
     glfwTerminate();
@@ -223,7 +228,7 @@ void MarioCraft::initWindow(const char* title, bool resizable) {
 }
 
 
-// initGLAD cargar todos los punteros de función OpenGL
+// initGLAD cargar todos los punteros de funciï¿½n OpenGL
 void MarioCraft::initGLAD() {
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
     std::cout << "ERROR::MAIN.CPP::GLAD_INIT_FAILED" << std::endl;
@@ -259,7 +264,7 @@ void MarioCraft::initLights(){
 
 }
 
-// initSkybox inicializa el cubo que generará el cielo del escenario
+// initSkybox inicializa el cubo que generarï¿½ el cielo del escenario
 void MarioCraft::initSkybox() {
   vector<std::string> faces {
     "resources/skybox/right.jpg",
@@ -275,7 +280,7 @@ void MarioCraft::initSkybox() {
 
 
 /*
-* Añadir Fuentes de luz Aquí
+* Aï¿½adir Fuentes de luz Aquï¿½
 */
 // setLights establece las propiedades de las fuentes de luz
 void MarioCraft::renderLights() {
@@ -352,7 +357,7 @@ void MarioCraft::initModels() {
         {-20.0f, -85.0f},
         {-50.0f, -35.0f},
 
-        //Mini Villa de Champiñones 6 juntos en cuadrícula 3x2
+        //Mini Villa de Champiï¿½ones 6 juntos en cuadrï¿½cula 3x2
         { 40.0f, -70.0f},
         { 40.0f, -30.0f},
         { 40.0f,  10.0f},
@@ -400,7 +405,7 @@ void MarioCraft::initModels() {
         models->addModel(casaToad);
     }
 
-    // Casas Minecraft // Buscar modelos más ligeros o quitar un poconón de vértices, mucha RAM
+    // Casas Minecraft // Buscar modelos mï¿½s ligeros o quitar un poconï¿½n de vï¿½rtices, mucha RAM
     /*for (int i = 0; i < 1; i++) {
         StaticModel* casa = new StaticModel("resources/objects/CasaMinecraft1/casa.obj");
         casa
@@ -464,4 +469,8 @@ void MarioCraft::initModels() {
     models->addModel(kart3, DYNAMIC);
 
 
+    // TOAD -------------------------------------------------------------------
+    //
+    DynamicModel* toad = new Toad("resources/objects/Toad");
+    models->addModel(toad, DYNAMIC);    
 }

@@ -15,6 +15,9 @@ void ModelManager::renderModels() {
 		model->Draw();
 	for (Model3D* model : dymanicModels)
 		model->Draw();
+	for (DynamicModel* model : dymanicModels)
+		model->renderModels();
+	
 }
 
 void ModelManager::keyboardInputModels() {
