@@ -73,6 +73,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>.\SFML-2.5.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>.\SFML-2.5.1\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -89,13 +91,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\headers;$(SolutionDir)include;$(SolutionDir)include\ASSIMP;$(SolutionDir)include\GLAD;$(SolutionDir)include\GLFW;$(SolutionDir)include\GLM;$(SolutionDir)include\KHR;$(SolutionDir)include\SDL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SFML-2.5.1\include;$(SolutionDir)src\headers;$(SolutionDir)include;$(SolutionDir)include\ASSIMP;$(SolutionDir)include\GLAD;$(SolutionDir)include\GLFW;$(SolutionDir)include\GLM;$(SolutionDir)include\KHR;$(SolutionDir)include\SDL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\SDL2;$(SolutionDir)lib\GLFW3;$(SolutionDir)lib\ASSIMP;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;assimp-vc141-mtd.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SFML-2.5.1\lib;$(SolutionDir)lib\SDL2;$(SolutionDir)lib\GLFW3;$(SolutionDir)lib\ASSIMP;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;assimp-vc141-mtd.lib;SDL2.lib;SDL2main.lib;sfml-main-d.lib;sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -176,6 +178,7 @@
     <ClInclude Include="src\headers\Model.h" />
     <ClInclude Include="src\headers\Model3D.h" />
     <ClInclude Include="src\headers\ModelManager.h" />
+    <ClInclude Include="src\headers\sound.h" />
     <ClInclude Include="src\headers\StaticModel.h" />
     <ClInclude Include="src\headers\Toad.h" />
   </ItemGroup>
@@ -187,6 +190,7 @@
     <ClCompile Include="src\sources\Model.cpp" />
     <ClCompile Include="src\sources\Model3D.cpp" />
     <ClCompile Include="src\sources\ModelManager.cpp" />
+    <ClCompile Include="src\sources\sound.cpp" />
     <ClCompile Include="src\sources\Toad.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
