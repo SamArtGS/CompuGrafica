@@ -8,7 +8,8 @@
 #include "DymanicModel.h"
 #include "Kart.h"
 #include "Toad.h"
-
+#include "Dragon.h"
+#include "Moneda.h"
 
 // Static declarations
 vector<Shader*> MarioCraft::shaders;
@@ -431,13 +432,6 @@ void MarioCraft::initModels() {
         ->Scale(0.5f, 0.5f, 0.5f);
     models->addModel(peach);
 
-    StaticModel* dragon = new StaticModel("resources/objects/Dragon/dragon.obj");
-    dragon
-        ->Init(glm::mat4(1.0f))
-        ->Translate(7.0f, 30.0f, 140.0f)
-        ->Scale(5.0f, 5.0f, 5.0f);
-    models->addModel(dragon);
-
     Kart* kart1 = new Kart("resources/objects/Karts/Kart1/kart1.obj");
     kart1
         ->Init(glm::mat4(1.0f))
@@ -473,4 +467,21 @@ void MarioCraft::initModels() {
     //
     DynamicModel* toad = new Toad("resources/objects/Toad");
     models->addModel(toad, DYNAMIC);    
+
+    // DRAGON -----------------------------------------------------------------
+    //
+    DynamicModel* dragon = new Dragon("resources/objects/Dragon");
+    models->addModel(dragon, DYNAMIC);
+
+    // MONEDAS ----------------------------------------------------------------
+    //
+    DynamicModel* moneda;
+    for (int i = 0; i < 10; i++) {
+      moneda = new Moneda("resources/objects/Moneda2/Moneda.obj");
+      moneda->Init(glm::mat4(1.0f))
+        ->Translate(20.f, 13.f, -50.f + 5 * i)
+        ->Scale(5.f, 5.f, 5.f);
+      models->addModel(moneda, DYNAMIC);
+    }
+
 }
