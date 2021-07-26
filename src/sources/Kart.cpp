@@ -1,6 +1,7 @@
 #pragma once
 #include "Kart.h"
 #include "MarioCraft.h"
+#include "sound.h"
 #include <GLM/gtx/string_cast.hpp>
 //Listener
 
@@ -115,6 +116,11 @@ void Kart::animate() {
 
 void Kart::keyboardInput() {
 	if (glfwGetKey(MarioCraft::window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+		if (salida == false) {
+			sound* iniCarrera = new sound();
+			iniCarrera->sonido("./resources/sounds/coint.wav");
+			iniCarrera->playSound(100);
+		}
 		salida = true;
 	}
 }

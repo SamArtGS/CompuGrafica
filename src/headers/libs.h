@@ -1,4 +1,8 @@
 #pragma once
+
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
 #include <Windows.h>
 
 #include <glad.h>
@@ -31,3 +35,4 @@
 #include <sstream>
 #include <map>
 #include <vector>
+

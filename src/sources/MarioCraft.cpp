@@ -2,6 +2,7 @@
 
 #include "MarioCraft.h"
 
+
 #define SDL_MAIN_HANDLED
 #include <SDL.h>
 #include "StaticModel.h"
@@ -11,10 +12,13 @@
 #include "Dragon.h"
 #include "Moneda.h"
 
+
 // Static declarations
 vector<Shader*> MarioCraft::shaders;
 Camera* MarioCraft::camera;
 GLFWwindow* MarioCraft::window;
+
+
 
 // Constructors / Destructors
 MarioCraft::MarioCraft(const char* title, const char* icono, int WINDOW_WIDTH, int WINDOW_HEIGHT, bool resizable)
@@ -62,6 +66,7 @@ MarioCraft::~MarioCraft() {
   for (size_t i = 0; i < this->shaders.size(); i++)
     delete this->shaders[i];
 }
+
 
 // Static functions
 // framebuffer_resize_callback establece el tama�o de la ventana
