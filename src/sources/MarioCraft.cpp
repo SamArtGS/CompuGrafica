@@ -473,9 +473,46 @@ void MarioCraft::initModels() {
     DynamicModel* toad = new Toad("resources/objects/Toad");
     models->addModel(toad, DYNAMIC);    
 
-    // DRAGON -----------------------------------------------------------------
+    // DRAGONES ---------------------------------------------------------------
     //
-    DynamicModel* dragon = new Dragon("resources/objects/Dragon");
+    vector<MoviemientosDragon> movimientos;
+    DynamicModel* dragon;
+    // DRAGON 1
+    movimientos.clear();
+    movimientos.push_back(MoviemientosDragon::SUR);
+    movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+    movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+    movimientos.push_back(MoviemientosDragon::OESTE);
+    movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+    movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+    movimientos.push_back(MoviemientosDragon::NORTE);
+    movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+    movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+    movimientos.push_back(MoviemientosDragon::ESTE);
+    movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+    movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+    dragon = new Dragon(
+      "resources/objects/Dragon", -28.0f, 50.f, 0.f, movimientos
+    );
+    models->addModel(dragon, DYNAMIC);
+
+    // DRAGON 2
+    movimientos.clear();
+    movimientos.push_back(MoviemientosDragon::SUR);
+    movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
+    movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
+    movimientos.push_back(MoviemientosDragon::ESTE);
+    movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
+    movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
+    movimientos.push_back(MoviemientosDragon::NORTE);
+    movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
+    movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
+    movimientos.push_back(MoviemientosDragon::OESTE);
+    movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
+    movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
+    dragon = new Dragon(
+      "resources/objects/Dragon", 100.0f, 50.f, 0.f, movimientos
+    );
     models->addModel(dragon, DYNAMIC);
 
     // MONEDAS ----------------------------------------------------------------

@@ -2,6 +2,12 @@
 #include "Model3D.h"
 #include "DymanicModel.h"
 
+enum class MoviemientosDragon {
+  INICIO, FIN,
+  NORTE, SUR, ESTE, OESTE,
+  GIRO_DERECHA, GIRO_IZQUIERDA
+};
+
 class Dragon : public DynamicModel {
 private:
   Model3D* cuerpo;
@@ -28,11 +34,6 @@ private:
   enum class Alas {
     INICIO, ALETEAR_ARRIBA, ALETEAR_ABAJO
   };
-  enum class Moverse {
-    INICIO, FIN,
-    NORTE, SUR, ESTE, OESTE,
-    GIRO_DERECHA, GIRO_IZQUIERDA
-  };
   enum class Boca {
     INICIO, BAJAR, ABRIR, CERRAR, SUBIR, IZQUIERDA, DERECHA, CENTRO
   };
@@ -40,10 +41,10 @@ private:
     INICIO, LANZAR, ELIMINAR, ACTUALIZAR
   };
   Alas estadoAlas = Alas::INICIO;
-  Moverse estadoMoverse = Moverse::INICIO;
+  MoviemientosDragon estadoMoverse = MoviemientosDragon::INICIO;
   Boca estadoBoca = Boca::INICIO;
   Magma estadoMagma = Magma::INICIO;
-  vector<Moverse> movimientos;
+  vector<MoviemientosDragon> movimientos;
   int i = 0;
   float anguloMuslo;
   float anguloAla;
@@ -53,6 +54,7 @@ private:
   float anguloHorizontalCabeza = 0.f;
   float anguloBoca = 0.f;
   float anguloColaX, anguloColaY;
+  float xInit, yInit, zInit;
   float incX, incY, incZ;
   float girX, girY, girZ;
   float magmaY;
@@ -62,7 +64,7 @@ private:
   float anguloPatas;
   float anguloManos;
 public:
-  Dragon(string rutaObj);
+  Dragon(string rutaObj, float, float, float, vector<MoviemientosDragon>);
   void animate();
   void keyboardInput();
   void renderModels();

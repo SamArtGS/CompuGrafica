@@ -2,7 +2,9 @@
 #include "Dragon.h"
 #include "MarioCraft.h"
 
-Dragon::Dragon(string rutaObj) : DynamicModel(rutaObj + "/cuerpo.obj") {
+Dragon::Dragon(string rutaObj, float xInit, float yInit, float zInit,
+	vector<MoviemientosDragon> movimientos)	
+	: DynamicModel(rutaObj + "/cuerpo.obj") {
 	cuerpo = this;
 	cabeza = new Model3D(rutaObj + "/cabeza.obj");
 	colaParte1 = new Model3D(rutaObj + "/cola.obj");
@@ -24,7 +26,10 @@ Dragon::Dragon(string rutaObj) : DynamicModel(rutaObj + "/cuerpo.obj") {
 	pataIzquierda = new Model3D(rutaObj + "/pata.obj");
 	manoDerecha = new Model3D(rutaObj + "/manos.obj");
 	manoIzquierda = new Model3D(rutaObj + "/manos.obj");
-	definirMovimientos();
+	this->xInit = xInit;
+	this->yInit = yInit;
+	this->zInit = zInit;
+	this->movimientos = movimientos;
 }
 
 //Listener
@@ -32,7 +37,7 @@ void Dragon::animate() {
 	update();
 
 	cuerpo->Init(glm::mat4(1.0f))
-		->Translate(-28.0f + incX, 50.f + incY, 0.f + incZ)
+		->Translate(xInit + incX, yInit + incY, zInit + incZ)
 		->Rotate(anguloGiro, 0.f, 1.f, 0.f);
 
 	cabeza->Init(cuerpo->model)
@@ -159,32 +164,32 @@ void Dragon::update() {
 
 	// Mover Dragón por el escenario
 	switch (estadoMoverse) {
-	case Moverse::INICIO:
+	case MoviemientosDragon::INICIO:
 		incX = incZ = 0;
 		anguloGiroAux =	anguloGiro = anguloColaY = 0.f;
 		siguienteMovimiento();
 		break;
-	case Moverse::NORTE:
+	case MoviemientosDragon::NORTE:
 		incZ -= 0.5f;
 		if (incZ < -50)
 			siguienteMovimiento();
 		break;
-	case Moverse::SUR:
+	case MoviemientosDragon::SUR:
 		incZ += 0.5f;
 		if (incZ > 50)
 			siguienteMovimiento();
 		break;
-	case Moverse::ESTE:
+	case MoviemientosDragon::ESTE:
 		incX += 0.5f;
 		if (incX > 50)
 			siguienteMovimiento();
 		break;
-	case Moverse::OESTE:
+	case MoviemientosDragon::OESTE:
 		incX -= 0.5f;
 		if (incX < -50)
 			siguienteMovimiento();
 		break;
-	case Moverse::GIRO_DERECHA:
+	case MoviemientosDragon::GIRO_DERECHA:
 		anguloGiroAux -= .5f;
 		anguloGiro -= .5f;
 		if (anguloGiroAux < -22)
@@ -197,7 +202,7 @@ void Dragon::update() {
 			siguienteMovimiento();
 		}
 		break;
-	case Moverse::GIRO_IZQUIERDA:
+	case MoviemientosDragon::GIRO_IZQUIERDA:
 		anguloGiroAux += .5f;
 		anguloGiro += .5f;
 		if (anguloGiroAux > 22)
@@ -210,7 +215,7 @@ void Dragon::update() {
 			siguienteMovimiento();
 		}
 		break;
-	case Moverse::FIN:
+	case MoviemientosDragon::FIN:
 		break;
 	}
 
@@ -293,18 +298,18 @@ void Dragon::update() {
 // movimientos que hará el dragon sobre el escenario
 void Dragon::definirMovimientos() {
 	//movimientos.push_back(Moverse::FIN);
-	movimientos.push_back(Moverse::SUR);
-	movimientos.push_back(Moverse::GIRO_DERECHA);
-	movimientos.push_back(Moverse::GIRO_DERECHA);
-	movimientos.push_back(Moverse::OESTE);
-	movimientos.push_back(Moverse::GIRO_DERECHA);
-	movimientos.push_back(Moverse::GIRO_DERECHA);
-	movimientos.push_back(Moverse::NORTE);
-	movimientos.push_back(Moverse::GIRO_DERECHA);
-	movimientos.push_back(Moverse::GIRO_DERECHA);
-	movimientos.push_back(Moverse::ESTE);
-	movimientos.push_back(Moverse::GIRO_DERECHA);
-	movimientos.push_back(Moverse::GIRO_DERECHA);
+	movimientos.push_back(MoviemientosDragon::SUR);
+	movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+	movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+	movimientos.push_back(MoviemientosDragon::OESTE);
+	movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+	movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+	movimientos.push_back(MoviemientosDragon::NORTE);
+	movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+	movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+	movimientos.push_back(MoviemientosDragon::ESTE);
+	movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+	movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
 }
 
 // siguienteMovimiento actualiza la variable estadoMovimiento
