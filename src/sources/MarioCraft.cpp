@@ -8,7 +8,7 @@
 #include "StaticModel.h"
 #include "DymanicModel.h"
 #include "Kart.h"
-#include "Toad.h"
+#include "JumpAnimation.h"
 #include "Dragon.h"
 #include "Moneda.h"
 
@@ -60,7 +60,7 @@ MarioCraft::~MarioCraft() {
 
   glfwDestroyWindow(this->window);
   glfwTerminate();
-  
+
 
   // Destruir los Shaders
   for (size_t i = 0; i < this->shaders.size(); i++)
@@ -76,13 +76,13 @@ void MarioCraft::framebuffer_resize_callback(GLFWwindow* window, int fbW, int fb
 
 //Accessor
 //
-int MarioCraft::getWindowShouldClose(){
+int MarioCraft::getWindowShouldClose() {
   return glfwWindowShouldClose(this->window);
 }
 
 //Modifier
 // setWindowShouldClose detecta el cierre de ventana
-void MarioCraft::setWindowShouldClose(){
+void MarioCraft::setWindowShouldClose() {
   glfwSetWindowShouldClose(this->window, GLFW_TRUE);
 }
 
@@ -97,7 +97,7 @@ void  MarioCraft::scroll_callback(GLFWwindow* window, double xoffset, double yof
 void MarioCraft::updateMouseInput() {
   glfwGetCursorPos(this->window, &this->mouseX, &this->mouseY);
 
-  if (this->firstMouse){
+  if (this->firstMouse) {
     this->lastMouseX = this->mouseX;
     this->lastMouseY = this->mouseY;
     this->firstMouse = false;
@@ -113,13 +113,13 @@ void MarioCraft::updateMouseInput() {
 
   // Reposiciona la camara
   camera->ProcessMouseMovement(mouseOffsetX, mouseOffsetY);
-  
+
 }
 
 // updateKeyboardInput reacciona a los eventos del teclado
 void MarioCraft::updateKeyboardInput() {
   // Program
-  if (glfwGetKey(this->window, GLFW_KEY_ESCAPE) == GLFW_PRESS){
+  if (glfwGetKey(this->window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
     glfwSetWindowShouldClose(this->window, GLFW_TRUE);
   }
 
@@ -132,7 +132,7 @@ void MarioCraft::updateKeyboardInput() {
     camera->ProcessKeyboard(LEFT, (float)deltaTime);
   if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
     camera->ProcessKeyboard(RIGHT, (float)deltaTime);
-    
+
   // Models
   models->keyboardInputModels();
 }
@@ -146,7 +146,7 @@ void MarioCraft::updateDeltaTime() {
 }
 
 // updateInput reacciona a los eventos de entrada
-void MarioCraft::updateInput(){
+void MarioCraft::updateInput() {
   glfwPollEvents();
 
   this->updateKeyboardInput();
@@ -163,7 +163,7 @@ void MarioCraft::update() {
 
 //
 void MarioCraft::render() {
-  
+
 
   // DRAW ---
   // Clear
@@ -222,7 +222,7 @@ void MarioCraft::initWindow(const char* title, const char* icono, bool resizable
   images[0].pixels = stbi_load(icono, &images[0].width, &images[0].height, 0, 4);
   glfwSetWindowIcon(window, 2, images);
   stbi_image_free(images[0].pixels);
-  if (this->window == nullptr){
+  if (this->window == nullptr) {
     std::cout << "ERROR::GLFW_WINDOW_INIT_FAILED" << "\n";
     glfwTerminate();
   }
@@ -252,19 +252,19 @@ void MarioCraft::initOpenGLOptions() {
 
 //
 void MarioCraft::initShaders() {
-    // staticShader
+  // staticShader
 
   this->shaders.push_back(
-      new Shader("Shaders/shader_Lights.vs", "Shaders/shader_Lights.fs")
+    new Shader("Shaders/shader_Lights.vs", "Shaders/shader_Lights.fs")
   );
-  
+
   // skyboxShader
   this->shaders.push_back(new Shader("Shaders/skybox.vs", "Shaders/skybox.fs"));
 }
 
 
 // initLights inicializa los vectores para las luces
-void MarioCraft::initLights(){
+void MarioCraft::initLights() {
   lightPosition = glm::vec3(0.0f, 4.0f, -10.0f);
   lightDirection = glm::vec3(0.0f, -1.0f, -1.0f);
 
@@ -272,7 +272,7 @@ void MarioCraft::initLights(){
 
 // initSkybox inicializa el cubo que generar� el cielo del escenario
 void MarioCraft::initSkybox() {
-  vector<std::string> faces {
+  vector<std::string> faces{
     "resources/skybox/right.jpg",
     "resources/skybox/left.jpg",
     "resources/skybox/top.jpg",
@@ -308,7 +308,7 @@ void MarioCraft::renderLights() {
   shaders[indice]->setFloat("pointLight[0].constant", 0.08f);
   shaders[indice]->setFloat("pointLight[0].linear", 0.009f); // Que tanto viaja la luz en el ambiente
   shaders[indice]->setFloat("pointLight[0].quadratic", 0.032f); // Intencidad de la fuente de luz
-  
+
   shaders[indice]->setVec3("pointLight[1].position", glm::vec3(-80.0, 0.0f, 0.0f));
   shaders[indice]->setVec3("pointLight[1].ambient", glm::vec3(1.0f, 0.0f, 0.0f));
   shaders[indice]->setVec3("pointLight[1].diffuse", glm::vec3(1.0f, 0.0f, 0.0f));
@@ -322,9 +322,9 @@ void MarioCraft::renderLights() {
   glm::mat4 tmp = glm::mat4(1.0f);
   // view/projection transformations
   ProjectionMatrix = glm::perspective(
-    glm::radians(camera->Zoom), 
-    (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, 
-    0.1f, 
+    glm::radians(camera->Zoom),
+    (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT,
+    0.1f,
     10000.0f
   );
   ViewMatrix = camera->GetViewMatrix();
@@ -337,9 +337,9 @@ void MarioCraft::renderSkybox() {
   shaders[shader_enum::SHADER_SKYBOX]->use();
   shaders[shader_enum::SHADER_SKYBOX]->setInt("skybox", 0);
   skybox->Draw(
-    *shaders[shader_enum::SHADER_SKYBOX], 
-    ViewMatrix, 
-    ProjectionMatrix, 
+    *shaders[shader_enum::SHADER_SKYBOX],
+    ViewMatrix,
+    ProjectionMatrix,
     *camera
   );
 }
@@ -351,179 +351,194 @@ void MarioCraft::renderModels() {
 
 void MarioCraft::initModels() {
 
-    models = new ModelManager();
-    float altura = 3.5f;
-    float coordenadasCasasToad[11][2] = {
-        //Tres a lado de la carretera, alineados, a lado de las gallinas
-        {-100.0f, -40.0f}, 
-        {-100.0f, -10.0f},
-        {-100.0f,  20.0f},
+  models = new ModelManager();
+  float altura = 3.5f;
+  float coordenadasCasasToad[11][2] = {
+    //Tres a lado de la carretera, alineados, a lado de las gallinas
+    {-100.0f, -40.0f},
+    {-100.0f, -10.0f},
+    {-100.0f,  20.0f},
 
-        //2 en medio de la carretera
-        {-20.0f, -85.0f},
-        {-50.0f, -35.0f},
+    //2 en medio de la carretera
+    {-20.0f, -85.0f},
+    {-50.0f, -35.0f},
 
-        //Mini Villa de Champi�ones 6 juntos en cuadr�cula 3x2
-        { 40.0f, -70.0f},
-        { 40.0f, -30.0f},
-        { 40.0f,  10.0f},
-        { 80.0f, -70.0f},
-        { 80.0f, -30.0f},
-        { 80.0f,  10.0f}
-    };
+    //Mini Villa de Champi�ones 6 juntos en cuadr�cula 3x2
+    { 40.0f, -70.0f},
+    { 40.0f, -30.0f},
+    { 40.0f,  10.0f},
+    { 80.0f, -70.0f},
+    { 80.0f, -30.0f},
+    { 80.0f,  10.0f}
+  };
 
-    float coordenadasCasasMaicra1[2][2] = {
-        {170.0f, 170.0f},
-        { 80.0f, 50.0f}
-    };
+  float coordenadasCasasMaicra1[2][2] = {
+      {170.0f, 170.0f},
+      { 80.0f, 50.0f}
+  };
 
-    float coordenadasCasasMaicra2[2][2] = {
-        {-170.0f, 270.0f},
-        {-60.0f,  100.0f}
-    };
+  float coordenadasCasasMaicra2[2][2] = {
+      {-170.0f, 270.0f},
+      {-60.0f,  100.0f}
+  };
 
-    //Escenario -------------------------------------------
-    //
-    StaticModel* escenario = new StaticModel("resources/objects/Escenario/Mariocraft.obj");
-    escenario
-        ->Init(glm::mat4(1.0f))
-        ->Scale(15.0f, 15.0f, 15.0f);
-    models->addModel(escenario);
+  //Escenario -------------------------------------------
+  //
+  StaticModel* escenario = new StaticModel("resources/objects/Escenario/Mariocraft.obj");
+  escenario
+    ->Init(glm::mat4(1.0f))
+    ->Scale(15.0f, 15.0f, 15.0f);
+  models->addModel(escenario);
 
-    //Castillo -------------------------------------------
-    //
-    StaticModel* castillo = new StaticModel("resources/objects/Castillo/castillo.obj");
-    castillo
-        ->Init(glm::mat4(1.0f))
-        ->Translate(15.0f, 54.0f, -245.0f)
-        ->Scale(65.0f, 65.0f, 65.0f);
-    models->addModel(castillo);
+  //Castillo -------------------------------------------
+  //
+  StaticModel* castillo = new StaticModel("resources/objects/Castillo/castillo.obj");
+  castillo
+    ->Init(glm::mat4(1.0f))
+    ->Translate(15.0f, 54.0f, -245.0f)
+    ->Scale(65.0f, 65.0f, 65.0f);
+  models->addModel(castillo);
 
-    // CasasTOAD -----------------------------------------
-    //
+  // CasasTOAD -----------------------------------------
+  //
 
-    for (int i = 0; i < 11; i++) {
-        StaticModel* casaToad = new StaticModel("resources/objects/CasaToad/casatoad.obj");
-        casaToad
-            ->Init(glm::mat4(1.0f))
-            ->Translate(coordenadasCasasToad[i][0], altura, coordenadasCasasToad[i][1])
-            ->Scale(10.0f, 10.0f, 10.0f);
-        models->addModel(casaToad);
-    }
+  for (int i = 0; i < 11; i++) {
+    StaticModel* casaToad = new StaticModel("resources/objects/CasaToad/casatoad.obj");
+    casaToad
+      ->Init(glm::mat4(1.0f))
+      ->Translate(coordenadasCasasToad[i][0], altura, coordenadasCasasToad[i][1])
+      ->Scale(10.0f, 10.0f, 10.0f);
+    models->addModel(casaToad);
+  }
 
-    // Casas Minecraft // Buscar modelos m�s ligeros o quitar un pocon�n de v�rtices, mucha RAM
-    /*for (int i = 0; i < 1; i++) {
-        StaticModel* casa = new StaticModel("resources/objects/CasaMinecraft1/casa.obj");
-        casa
-            ->Init(glm::mat4(1.0f))
-            ->Translate(coordenadasCasasMaicra1[i][0], 30.0f, coordenadasCasasMaicra1[i][1])
-            ->Scale(2.0f, 2.0f, 2.0f);
-        models->addModel(casa);
-    }*/
+  // Casas Minecraft // Buscar modelos m�s ligeros o quitar un pocon�n de v�rtices, mucha RAM
+  /*for (int i = 0; i < 1; i++) {
+      StaticModel* casa = new StaticModel("resources/objects/CasaMinecraft1/casa.obj");
+      casa
+          ->Init(glm::mat4(1.0f))
+          ->Translate(coordenadasCasasMaicra1[i][0], 30.0f, coordenadasCasasMaicra1[i][1])
+          ->Scale(2.0f, 2.0f, 2.0f);
+      models->addModel(casa);
+  }*/
 
-    // Arboles
-    StaticModel* steve = new StaticModel("resources/objects/Steve/steve.obj");
-    steve
-        ->Init(glm::mat4(1.0f))
-        ->Translate(170.0f, 30.0f, 170.0f)
-        ->Scale(3.0f, 3.0f, 3.0f);
-    models->addModel(steve);
-
-
-    StaticModel* peach = new StaticModel("resources/objects/Peach/Peach.obj");
-    peach
-        ->Init(glm::mat4(1.0f))
-        ->Translate(70.0f, 30.0f, 140.0f)
-        ->Scale(0.5f, 0.5f, 0.5f);
-    models->addModel(peach);
-
-    Kart* kart1 = new Kart("resources/objects/Karts/Kart1/kart1.obj");
-    kart1
-        ->Init(glm::mat4(1.0f))
-        ->Translate(13.0f, 12.5f, 120.0f)
-        ->Rotate(172.0f,0.0f,1.0f, 0.0f)
-        ->Scale(1.0f, 1.0f, 1.0f);
-    kart1->velocidad = 0.5f;
-    models->addModel(kart1, DYNAMIC);
+  // Arboles
+  StaticModel* steve = new StaticModel("resources/objects/Steve/steve.obj");
+  steve
+    ->Init(glm::mat4(1.0f))
+    ->Translate(170.0f, 30.0f, 170.0f)
+    ->Scale(3.0f, 3.0f, 3.0f);
+  models->addModel(steve);
 
 
+  StaticModel* peach = new StaticModel("resources/objects/Peach/Peach.obj");
+  peach
+    ->Init(glm::mat4(1.0f))
+    ->Translate(70.0f, 30.0f, 140.0f)
+    ->Scale(0.5f, 0.5f, 0.5f);
+  models->addModel(peach);
 
-    Kart* kart2 = new Kart("resources/objects/Karts/Kart2/kart2.obj");
-    kart2
-        ->Init(glm::mat4(1.0f))
-        ->Translate(10.0f, 12.5f, 120.0f)
-        ->Rotate(172.0f, 0.0f, 1.0f, 0.0f)
-        ->Scale(1.0f, 1.0f, 1.0f);
-    kart2->velocidad = 0.3f;
-    models->addModel(kart2, DYNAMIC);
-
-
-    Kart* kart3 = new Kart("resources/objects/Karts/Kart3/kart3.obj");
-    kart3
-        ->Init(glm::mat4(1.0f))
-        ->Translate(7.0f, 12.5f, 120.0f)
-        ->Rotate(172.0f, 0.0f, 1.0f, 0.0f)
-        ->Scale(1.0f, 1.0f, 1.0f);
-    kart3->velocidad = 0.7f;
-    models->addModel(kart3, DYNAMIC);
+  Kart* kart1 = new Kart("resources/objects/Karts/Kart1/kart1.obj");
+  kart1
+    ->Init(glm::mat4(1.0f))
+    ->Translate(13.0f, 12.5f, 120.0f)
+    ->Rotate(172.0f, 0.0f, 1.0f, 0.0f)
+    ->Scale(1.0f, 1.0f, 1.0f);
+  kart1->velocidad = 0.5f;
+  models->addModel(kart1, DYNAMIC);
 
 
-    // TOAD -------------------------------------------------------------------
-    //
-    DynamicModel* toad = new Toad("resources/objects/Toad");
-    models->addModel(toad, DYNAMIC);    
 
-    // DRAGONES ---------------------------------------------------------------
-    //
-    vector<MoviemientosDragon> movimientos;
-    DynamicModel* dragon;
-    // DRAGON 1
-    movimientos.clear();
-    movimientos.push_back(MoviemientosDragon::SUR);
-    movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-    movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-    movimientos.push_back(MoviemientosDragon::OESTE);
-    movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-    movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-    movimientos.push_back(MoviemientosDragon::NORTE);
-    movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-    movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-    movimientos.push_back(MoviemientosDragon::ESTE);
-    movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-    movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-    dragon = new Dragon(
-      "resources/objects/Dragon", -28.0f, 50.f, 0.f, movimientos
-    );
-    models->addModel(dragon, DYNAMIC);
+  Kart* kart2 = new Kart("resources/objects/Karts/Kart2/kart2.obj");
+  kart2
+    ->Init(glm::mat4(1.0f))
+    ->Translate(10.0f, 12.5f, 120.0f)
+    ->Rotate(172.0f, 0.0f, 1.0f, 0.0f)
+    ->Scale(1.0f, 1.0f, 1.0f);
+  kart2->velocidad = 0.3f;
+  models->addModel(kart2, DYNAMIC);
 
-    // DRAGON 2
-    movimientos.clear();
-    movimientos.push_back(MoviemientosDragon::SUR);
-    movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
-    movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
-    movimientos.push_back(MoviemientosDragon::ESTE);
-    movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
-    movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
-    movimientos.push_back(MoviemientosDragon::NORTE);
-    movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
-    movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
-    movimientos.push_back(MoviemientosDragon::OESTE);
-    movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
-    movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
-    dragon = new Dragon(
-      "resources/objects/Dragon", 100.0f, 50.f, 0.f, movimientos
-    );
-    models->addModel(dragon, DYNAMIC);
 
-    // MONEDAS ----------------------------------------------------------------
-    //
-    DynamicModel* moneda;
-    for (int i = 0; i < 10; i++) {
-      moneda = new Moneda("resources/objects/Moneda2/Moneda.obj");
-      moneda->Init(glm::mat4(1.0f))
-        ->Translate(20.f, 13.f, -50.f + 5 * i)
-        ->Scale(5.f, 5.f, 5.f);
-      models->addModel(moneda, DYNAMIC);
-    }
+  Kart* kart3 = new Kart("resources/objects/Karts/Kart3/kart3.obj");
+  kart3
+    ->Init(glm::mat4(1.0f))
+    ->Translate(7.0f, 12.5f, 120.0f)
+    ->Rotate(172.0f, 0.0f, 1.0f, 0.0f)
+    ->Scale(1.0f, 1.0f, 1.0f);
+  kart3->velocidad = 0.7f;
+  models->addModel(kart3, DYNAMIC);
+
+
+  // TOAD -------------------------------------------------------------------
+  //
+  // TOAD 1
+  JumpAnimation* toad1 = new JumpAnimation("resources/objects/Toad", -28.f, 14.2f, 0.f);
+  toad1->addEstadoAnimacion(Desplazamiento::INICIO)
+    ->addEstadoAnimacion(Desplazamiento::SUR, 0.1, 28)
+    ->addEstadoAnimacion(Desplazamiento::GIRO_DERECHA, 1, 90)
+    ->addEstadoAnimacion(Desplazamiento::OESTE, 0.1, 33)
+    ->addEstadoAnimacion(Desplazamiento::GIRO_DERECHA, 1, 90)
+    ->addEstadoAnimacion(Desplazamiento::NORTE, 0.1, 28)
+    ->addEstadoAnimacion(Desplazamiento::GIRO_DERECHA, 1, 90)
+    ->addEstadoAnimacion(Desplazamiento::ESTE, 0.1, 33)
+    ->addEstadoAnimacion(Desplazamiento::GIRO_DERECHA, 1, 90);
+  models->addModel(toad1, DYNAMIC);
+
+  // TOAD 2
+  JumpAnimation* toad2 = new JumpAnimation("resources/objects/Toad", 50.f, 14.2f, 0.f);
+  toad2->setEstadosAnimacion(toad1->animaciones); // Misma secuencia de animacion que toad1
+  models->addModel(toad2, DYNAMIC);
+
+  // DRAGONES ---------------------------------------------------------------
+  //
+  vector<MoviemientosDragon> movimientos;
+  DynamicModel* dragon;
+  // DRAGON 1
+  movimientos.clear();
+  movimientos.push_back(MoviemientosDragon::SUR);
+  movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+  movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+  movimientos.push_back(MoviemientosDragon::OESTE);
+  movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+  movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+  movimientos.push_back(MoviemientosDragon::NORTE);
+  movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+  movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+  movimientos.push_back(MoviemientosDragon::ESTE);
+  movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+  movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
+  dragon = new Dragon(
+    "resources/objects/Dragon", -28.0f, 50.f, 0.f, movimientos
+  );
+  models->addModel(dragon, DYNAMIC);
+
+  // DRAGON 2
+  movimientos.clear();
+  movimientos.push_back(MoviemientosDragon::SUR);
+  movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
+  movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
+  movimientos.push_back(MoviemientosDragon::ESTE);
+  movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
+  movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
+  movimientos.push_back(MoviemientosDragon::NORTE);
+  movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
+  movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
+  movimientos.push_back(MoviemientosDragon::OESTE);
+  movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
+  movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
+  dragon = new Dragon(
+    "resources/objects/Dragon", 100.0f, 50.f, 0.f, movimientos
+  );
+  models->addModel(dragon, DYNAMIC);
+
+  // MONEDAS ----------------------------------------------------------------
+  //
+  DynamicModel* moneda;
+  for (int i = 0; i < 10; i++) {
+    moneda = new Moneda("resources/objects/Moneda2/Moneda.obj");
+    moneda->Init(glm::mat4(1.0f))
+      ->Translate(20.f, 13.f, -50.f + 5 * i)
+      ->Scale(5.f, 5.f, 5.f);
+    models->addModel(moneda, DYNAMIC);
+  }
 
 }

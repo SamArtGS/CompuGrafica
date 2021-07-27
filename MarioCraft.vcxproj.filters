@@ -92,9 +92,6 @@
     <ClInclude Include="src\headers\Kart.h">
       <Filter>Archivos de encabezado\Objetos</Filter>
     </ClInclude>
-    <ClInclude Include="src\headers\Toad.h">
-      <Filter>Archivos de encabezado\Objetos</Filter>
-    </ClInclude>
     <ClInclude Include="src\headers\sound.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -102,6 +99,9 @@
       <Filter>Archivos de encabezado\Objetos</Filter>
     </ClInclude>
     <ClInclude Include="src\headers\Moneda.h">
+      <Filter>Archivos de encabezado\Objetos</Filter>
+    </ClInclude>
+    <ClInclude Include="src\headers\JumpAnimation.h">
       <Filter>Archivos de encabezado\Objetos</Filter>
     </ClInclude>
   </ItemGroup>
@@ -127,9 +127,6 @@
     <ClCompile Include="src\sources\Kart.cpp">
       <Filter>Archivos de origen\Objetos</Filter>
     </ClCompile>
-    <ClCompile Include="src\sources\Toad.cpp">
-      <Filter>Archivos de origen\Objetos</Filter>
-    </ClCompile>
     <ClCompile Include="src\sources\sound.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
@@ -137,6 +134,9 @@
       <Filter>Archivos de origen\Objetos</Filter>
     </ClCompile>
     <ClCompile Include="src\sources\Dragon.cpp">
+      <Filter>Archivos de origen\Objetos</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sources\JumpAnimation.cpp">
       <Filter>Archivos de origen\Objetos</Filter>
     </ClCompile>
   </ItemGroup>

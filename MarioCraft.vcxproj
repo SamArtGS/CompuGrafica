@@ -182,7 +182,7 @@
     <ClInclude Include="src\headers\Moneda.h" />
     <ClInclude Include="src\headers\sound.h" />
     <ClInclude Include="src\headers\StaticModel.h" />
-    <ClInclude Include="src\headers\Toad.h" />
+    <ClInclude Include="src\headers\JumpAnimation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
@@ -195,7 +195,7 @@
     <ClCompile Include="src\sources\ModelManager.cpp" />
     <ClCompile Include="src\sources\Moneda.cpp" />
     <ClCompile Include="src\sources\sound.cpp" />
-    <ClCompile Include="src\sources\Toad.cpp" />
+    <ClCompile Include="src\sources\JumpAnimation.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
