@@ -3,7 +3,7 @@
 #include "JumpAnimation.h"
 #include "MarioCraft.h"
 
-JumpAnimation::JumpAnimation(string rutaObj, float xInit, float yInit, float zInit) 
+JumpAnimation::JumpAnimation(string rutaObj, float xInit, float yInit, float zInit, float yRotInit)
 	: DynamicModel(rutaObj + "/cuerpo.obj"){
 	cuerpo = this;
 	cabeza = new Model3D(rutaObj + "/cabeza.obj");
@@ -14,7 +14,7 @@ JumpAnimation::JumpAnimation(string rutaObj, float xInit, float yInit, float zIn
 	this->xInit = xInit;
 	this->yInit = yInit;
 	this->zInit = zInit;
-	this->animaciones = animaciones;
+	this->yRotInit = yRotInit;
 }
 
 
@@ -24,7 +24,7 @@ void JumpAnimation::animate() {
 
 	cuerpo->Init(glm::mat4(1.0f))
 		->Translate(xInit + desplazamientoX, yInit + desplazamientoY, zInit + desplazamientoZ)
-		->Rotate(anguloGiro, 0.f, 1.f, 0.f);
+		->Rotate(yRotInit + anguloGiro, 0.f, 1.f, 0.f);
 
 	cabeza->Init(cuerpo->model)
 		->Translate(.127f, .254f, 0.f);

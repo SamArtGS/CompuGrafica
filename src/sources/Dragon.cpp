@@ -2,8 +2,7 @@
 #include "Dragon.h"
 #include "MarioCraft.h"
 
-Dragon::Dragon(string rutaObj, float xInit, float yInit, float zInit,
-	vector<MoviemientosDragon> movimientos)	
+Dragon::Dragon(string rutaObj, float xInit, float yInit, float zInit, float yRotInit)
 	: DynamicModel(rutaObj + "/cuerpo.obj") {
 	cuerpo = this;
 	cabeza = new Model3D(rutaObj + "/cabeza.obj");
@@ -29,7 +28,7 @@ Dragon::Dragon(string rutaObj, float xInit, float yInit, float zInit,
 	this->xInit = xInit;
 	this->yInit = yInit;
 	this->zInit = zInit;
-	this->movimientos = movimientos;
+	this->yRotInit = yRotInit;
 }
 
 //Listener
@@ -37,8 +36,8 @@ void Dragon::animate() {
 	update();
 
 	cuerpo->Init(glm::mat4(1.0f))
-		->Translate(xInit + incX, yInit + incY, zInit + incZ)
-		->Rotate(anguloGiro, 0.f, 1.f, 0.f);
+		->Translate(xInit + desplazamientoX, yInit + desplazamientoY, zInit + desplazamientoZ)
+		->Rotate(yRotInit + anguloGiro, 0.f, 1.f, 0.f);
 
 	cabeza->Init(cuerpo->model)
 		->Translate(0.f, 0.38f, 9.85f)
@@ -132,11 +131,11 @@ void Dragon::update() {
 		anguloPiernas = -20.f;
 		anguloPatas = -20.f;
 		anguloManos = 0.f;
-		incY = 0.f;
+		desplazamientoY = 0.f;
 		estadoAlas = Alas::ALETEAR_ARRIBA;
 		break;
 	case (Alas::ALETEAR_ARRIBA):
-		incY += 0.2f;
+		desplazamientoY += 0.2f;
 		anguloMuslo += 1.f;
 		anguloAla += 1.3f;
 		anguloColaX -= .5f;
@@ -149,7 +148,7 @@ void Dragon::update() {
 		}
 		break;
 	case (Alas::ALETEAR_ABAJO):
-		incY -= 0.2f;
+		desplazamientoY -= 0.2f;
 		anguloMuslo -= 1.f;
 		anguloAla -= 1.3f;
 		anguloColaX += .5f;
@@ -163,59 +162,71 @@ void Dragon::update() {
 	}
 
 	// Mover Dragón por el escenario
-	switch (estadoMoverse) {
+	switch (estadoAnimacion.estado) {
 	case MoviemientosDragon::INICIO:
-		incX = incZ = 0;
-		anguloGiroAux =	anguloGiro = anguloColaY = 0.f;
+		desplazamientoX = desplazamientoZ = 0.f;
+		deltaX = deltaZ = 0.f;
+		anguloGiro = anguloColaY = 0.f;
+		deltaGiro = 0.f;
 		siguienteMovimiento();
 		break;
 	case MoviemientosDragon::NORTE:
-		incZ -= 0.5f;
-		if (incZ < -50)
+		deltaZ -= estadoAnimacion.delta;
+		desplazamientoZ -= estadoAnimacion.delta;
+		if (deltaZ <= -estadoAnimacion.limite) {
+			deltaZ = 0.f;
 			siguienteMovimiento();
+		}
 		break;
 	case MoviemientosDragon::SUR:
-		incZ += 0.5f;
-		if (incZ > 50)
+		deltaZ += estadoAnimacion.delta;
+		desplazamientoZ += estadoAnimacion.delta;
+		if (deltaZ >= estadoAnimacion.limite) {
+			deltaZ = 0.f;
 			siguienteMovimiento();
+		}
 		break;
 	case MoviemientosDragon::ESTE:
-		incX += 0.5f;
-		if (incX > 50)
+		deltaX += estadoAnimacion.delta;
+		desplazamientoX += estadoAnimacion.delta;
+		if (deltaX >= estadoAnimacion.limite) {
+			deltaX = 0.f;
 			siguienteMovimiento();
+		}
 		break;
 	case MoviemientosDragon::OESTE:
-		incX -= 0.5f;
-		if (incX < -50)
+		deltaX -= estadoAnimacion.delta;
+		desplazamientoX -= estadoAnimacion.delta;
+		if (deltaX <= -estadoAnimacion.limite) {
+			deltaX = 0.f;
 			siguienteMovimiento();
+		}
 		break;
 	case MoviemientosDragon::GIRO_DERECHA:
-		anguloGiroAux -= .5f;
-		anguloGiro -= .5f;
-		if (anguloGiroAux < -22)
+		deltaGiro -= estadoAnimacion.delta;
+		anguloGiro -= estadoAnimacion.delta;
+		if (deltaGiro < -estadoAnimacion.limite / 2)
 			anguloColaY += .5f;
 		else
 			anguloColaY -= .5f;
-		if (anguloGiroAux <= -45) {
-			anguloGiroAux = 0.f;
+		if (deltaGiro <= -estadoAnimacion.limite) {
+			deltaGiro = 0.f;
 			anguloColaY = 0.f;
 			siguienteMovimiento();
 		}
 		break;
 	case MoviemientosDragon::GIRO_IZQUIERDA:
-		anguloGiroAux += .5f;
-		anguloGiro += .5f;
-		if (anguloGiroAux > 22)
+		deltaGiro += estadoAnimacion.delta;
+		anguloGiro += estadoAnimacion.delta;
+		if (deltaGiro > estadoAnimacion.limite / 2)
 			anguloColaY -= .5f;
 		else
 			anguloColaY += .5f;
-		if (anguloGiroAux >= 45) {
-			anguloGiroAux = 0.f;
+		if (deltaGiro >= estadoAnimacion.limite) {
+			deltaGiro = 0.f;
 			anguloColaY = 0.f;
 			siguienteMovimiento();
 		}
-		break;
-	case MoviemientosDragon::FIN:
 		break;
 	}
 
@@ -294,31 +305,27 @@ void Dragon::update() {
 	}
 }
 
-// definirMovimientos agrega al arreglo movimientos el conjunto de 
-// movimientos que hará el dragon sobre el escenario
-void Dragon::definirMovimientos() {
-	//movimientos.push_back(Moverse::FIN);
-	movimientos.push_back(MoviemientosDragon::SUR);
-	movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-	movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-	movimientos.push_back(MoviemientosDragon::OESTE);
-	movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-	movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-	movimientos.push_back(MoviemientosDragon::NORTE);
-	movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-	movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-	movimientos.push_back(MoviemientosDragon::ESTE);
-	movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-	movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-}
-
 // siguienteMovimiento actualiza la variable estadoMovimiento
 // simula una lista circular donde si se llega al final del vector, 
 // se regresa a la posicion 0 (reiniciar animación)
 void Dragon::siguienteMovimiento() {
-	estadoMoverse = movimientos[i++];
-	if (i == movimientos.size()) i = 0;
+	estadoAnimacion = animaciones[i++];
+	if (i == animaciones.size()) i = 0;
 }
+
+Dragon* Dragon::addEstadoAnimacion(MoviemientosDragon estado, float delta, float limite) {
+	Animacion animacion;
+	animacion.estado = estado;
+	animacion.delta = delta;
+	animacion.limite = limite;
+	animaciones.push_back(animacion);
+	return this;
+}
+
+void Dragon::setEstadosAnimacion(vector<Animacion> animaciones) {
+	this->animaciones = animaciones;
+}
+
 
 void Dragon::keyboardInput() {
 

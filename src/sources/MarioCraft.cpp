@@ -484,51 +484,38 @@ void MarioCraft::initModels() {
   models->addModel(toad1, DYNAMIC);
 
   // TOAD 2
-  JumpAnimation* toad2 = new JumpAnimation("resources/objects/Toad", 50.f, 14.2f, 0.f);
-  toad2->setEstadosAnimacion(toad1->animaciones); // Misma secuencia de animacion que toad1
+  JumpAnimation* toad2 = new JumpAnimation("resources/objects/Toad", -150.f, 14.2f, -80.f, 90);
+  //toad2->setEstadosAnimacion(toad1->animaciones); // Misma secuencia de animacion que toad1
+  toad2->addEstadoAnimacion(Desplazamiento::INICIO)
+    ->addEstadoAnimacion(Desplazamiento::ESTE, 0.2, 100)
+    ->addEstadoAnimacion(Desplazamiento::GIRO_DERECHA, 2.f, 180)
+    ->addEstadoAnimacion(Desplazamiento::OESTE, 0.2, 100)
+    ->addEstadoAnimacion(Desplazamiento::GIRO_IZQUIERDA, 2.f, 180);
   models->addModel(toad2, DYNAMIC);
 
   // DRAGONES ---------------------------------------------------------------
   //
-  vector<MoviemientosDragon> movimientos;
-  DynamicModel* dragon;
   // DRAGON 1
-  movimientos.clear();
-  movimientos.push_back(MoviemientosDragon::SUR);
-  movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-  movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-  movimientos.push_back(MoviemientosDragon::OESTE);
-  movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-  movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-  movimientos.push_back(MoviemientosDragon::NORTE);
-  movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-  movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-  movimientos.push_back(MoviemientosDragon::ESTE);
-  movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-  movimientos.push_back(MoviemientosDragon::GIRO_DERECHA);
-  dragon = new Dragon(
-    "resources/objects/Dragon", -28.0f, 50.f, 0.f, movimientos
-  );
-  models->addModel(dragon, DYNAMIC);
+  Dragon * dragon1 = new Dragon("resources/objects/Dragon", -28.0f, 50.f, 0.f);
+  dragon1->addEstadoAnimacion(MoviemientosDragon::INICIO)
+    ->addEstadoAnimacion(MoviemientosDragon::SUR, 0.5f, 100)
+    ->addEstadoAnimacion(MoviemientosDragon::GIRO_DERECHA, 1.f, 90)
+    ->addEstadoAnimacion(MoviemientosDragon::OESTE, 0.5f, 100)
+    ->addEstadoAnimacion(MoviemientosDragon::GIRO_DERECHA, 1.f, 90)
+    ->addEstadoAnimacion(MoviemientosDragon::NORTE, 0.5f, 100)
+    ->addEstadoAnimacion(MoviemientosDragon::GIRO_DERECHA, 1.f, 90)
+    ->addEstadoAnimacion(MoviemientosDragon::ESTE, 0.5f, 100)
+    ->addEstadoAnimacion(MoviemientosDragon::GIRO_DERECHA, 1.f, 90);
+  models->addModel(dragon1, DYNAMIC);
 
   // DRAGON 2
-  movimientos.clear();
-  movimientos.push_back(MoviemientosDragon::SUR);
-  movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
-  movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
-  movimientos.push_back(MoviemientosDragon::ESTE);
-  movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
-  movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
-  movimientos.push_back(MoviemientosDragon::NORTE);
-  movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
-  movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
-  movimientos.push_back(MoviemientosDragon::OESTE);
-  movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
-  movimientos.push_back(MoviemientosDragon::GIRO_IZQUIERDA);
-  dragon = new Dragon(
-    "resources/objects/Dragon", 100.0f, 50.f, 0.f, movimientos
-  );
-  models->addModel(dragon, DYNAMIC);
+  Dragon* dragon2 = new Dragon("resources/objects/Dragon", -75.0f, 70.f, -140.f, 90.f);
+  dragon2->addEstadoAnimacion(MoviemientosDragon::INICIO)
+    ->addEstadoAnimacion(MoviemientosDragon::ESTE, 0.5f, 150)
+    ->addEstadoAnimacion(MoviemientosDragon::GIRO_IZQUIERDA, 1.f, 180)
+    ->addEstadoAnimacion(MoviemientosDragon::OESTE, 0.5f, 150)
+    ->addEstadoAnimacion(MoviemientosDragon::GIRO_DERECHA, 1.f, 180);
+  models->addModel(dragon2, DYNAMIC);
 
   // MONEDAS ----------------------------------------------------------------
   //

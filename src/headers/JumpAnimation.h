@@ -60,9 +60,10 @@ private:
     INICIO, ESTADO_1, ESTADO_2, ESTADO_3, ESTADO_4
   };
   Brincar estadoBrincar = Brincar::INICIO;
-  int i = 0; // Posicion actual del vector de movimientos
+  int i = 0; // Posicion actual del vector de animaciones
   AnimacionBrincar estadoAnimacion;
   float xInit, yInit, zInit;
+  float yRotInit;
   float desplazamientoX, desplazamientoY, desplazamientoZ;
   float deltaX, deltaZ;
   float anguloGiro;
@@ -71,9 +72,10 @@ private:
 public:
   vector<AnimacionBrincar> animaciones;
   // JumpAnimation recibe la ruta de la carpeta que contiene todos los objetos,
-  // y las posiciones iniciales de los objetos, estas posiciones se consideran
-  // para realizar la traslacion del objeto.
-  JumpAnimation(string rutaObj, float, float, float);
+  // las posiciones iniciales de los objetos, estas posiciones se consideran
+  // para realizar la traslacion del objeto, y el angulo de rotacion en el 
+  // eje Y en caso de desear rotar el objeto.
+  JumpAnimation(string rutaObj, float, float, float, float = 0.f);
   void animate();
   void keyboardInput() {};
   void renderModels();
