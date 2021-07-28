@@ -1,3 +1,10 @@
+/*-------------------------------------------------------------------*/
+/* ---------------- PROYECTO FINAL: MARIOCRAFT ----------------------*/
+/*-----------------              2021-2          --------------------*/
+/*------------- Alumno: Ricardo Antonio Hernández Torres ------------*/
+/*------------- Alumno: Jorge Cárdenas Cárdenas          ------------*/
+/*------------- Alumno: Samuel Arturo Garrido Sánchez    ------------*/
+
 #pragma once
 
 #include "MarioCraft.h"
