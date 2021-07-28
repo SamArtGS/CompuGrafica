@@ -13,7 +13,9 @@
 #include "Moneda.h"
 #include "creeper.h"
 #include "Peach.h"
-
+#include "Golem.h"
+#include "MobMinecraft.h"
+#include "Vaca.h"
 
 // Static declarations
 vector<Shader*> MarioCraft::shaders;
@@ -392,6 +394,17 @@ void MarioCraft::initModels() {
     ->Scale(15.0f, 15.0f, 15.0f);
   models->addModel(escenario);
 
+  // Arboles
+  //
+  StaticModel* arbol = new StaticModel("resources/objects/ArbolMinecraft1/arbol.obj");
+  arbol
+      ->Init(glm::mat4(1.0f))
+      ->Translate(100,10,50)
+      ->Scale(15.0f, 15.0f, 15.0f);
+  models->addModel(arbol);
+
+
+
   //Castillo -------------------------------------------
   //
   StaticModel* castillo = new StaticModel("resources/objects/Castillo/castillo.obj");
@@ -423,14 +436,6 @@ void MarioCraft::initModels() {
       models->addModel(casa);
   }*/
 
-  // Arboles
-  StaticModel* steve = new StaticModel("resources/objects/Steve/steve.obj");
-  steve
-    ->Init(glm::mat4(1.0f))
-    ->Translate(170.0f, 30.0f, 170.0f)
-    ->Scale(3.0f, 3.0f, 3.0f);
-  models->addModel(steve);
-
   Kart* kart1 = new Kart("resources/objects/Karts/Kart1/kart1.obj");
   kart1
     ->Init(glm::mat4(1.0f))
@@ -460,6 +465,47 @@ void MarioCraft::initModels() {
     ->Scale(1.0f, 1.0f, 1.0f);
   kart3->velocidad = 0.7f;
   models->addModel(kart3, DYNAMIC);
+
+  //ESquina superior derecha
+  DynamicModel* golem = new Golem("resources/objects/Golem",
+      Golem::Tipo::Antropomorfico,
+      Golem::TipoMovimiento::sixSag);
+  golem
+      ->Init(glm::mat4(1.0f))
+      ->Translate(110.0f, 10.0f, -150.0f)
+      ->Scale(0.5f, 0.5f, 0.5f);
+  models->addModel(golem, DYNAMIC);
+
+
+  //Esquina inferior derecha
+  DynamicModel* golem2 = new Golem("resources/objects/Golem",
+      Golem::Tipo::Antropomorfico,
+      Golem::TipoMovimiento::sixSag);
+  golem2
+      ->Init(glm::mat4(1.0f))
+      ->Translate(100.0f, 10.0f, 180)
+      ->Scale(0.5f, 0.5f, 0.5f);
+  models->addModel(golem2, DYNAMIC);
+  
+  
+  //Esquina Superior izquierda
+  DynamicModel* golem3 = new Golem("resources/objects/Golem",
+      Golem::Tipo::Antropomorfico,
+      Golem::TipoMovimiento::sixSag);
+  golem3
+      ->Init(glm::mat4(1.0f))
+      ->Translate(-170.0f, 10.0f, -130.0f)
+      ->Scale(0.5f, 0.5f, 0.5f);
+  models->addModel(golem3, DYNAMIC);
+
+  DynamicModel* steve = new Golem("resources/objects/Steve",
+      Golem::Tipo::Antropomorfico,
+      Golem::TipoMovimiento::sixSag);
+  steve
+      ->Init(glm::mat4(1.0f))
+      ->Translate(-150.0f, 10.0f, -110.0f)
+      ->Scale(0.5f, 0.5f, 0.5f);
+  models->addModel(steve, DYNAMIC);
 
 
   // TOAD -------------------------------------------------------------------

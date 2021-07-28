@@ -1,15 +1,15 @@
 Wavefront OBJ material file
 # Material Count: 1
 
-newmtl steve
+newmtl vaca
 Ns 0
 Ka 0.2 0.2 0.2
 Kd 1 1 1
 Ks 0 0 0
-map_Ka steve.png
+map_Ka vaca.png
 # for G3D, to make textures look blocky:
 interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
-map_Kd steve.png
+map_Kd vaca.png
 illum 2
 # d 0.535
 # Tr 0.465

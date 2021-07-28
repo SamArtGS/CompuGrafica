@@ -174,9 +174,11 @@
     <ClInclude Include="src\headers\creeper.h" />
     <ClInclude Include="src\headers\Dragon.h" />
     <ClInclude Include="src\headers\DymanicModel.h" />
+    <ClInclude Include="src\headers\Golem.h" />
     <ClInclude Include="src\headers\Kart.h" />
     <ClInclude Include="src\headers\libs.h" />
     <ClInclude Include="src\headers\MarioCraft.h" />
+    <ClInclude Include="src\headers\MobMinecraft.h" />
     <ClInclude Include="src\headers\Model.h" />
     <ClInclude Include="src\headers\Model3D.h" />
     <ClInclude Include="src\headers\ModelManager.h" />
@@ -185,14 +187,17 @@
     <ClInclude Include="src\headers\sound.h" />
     <ClInclude Include="src\headers\StaticModel.h" />
     <ClInclude Include="src\headers\JumpAnimation.h" />
+    <ClInclude Include="src\headers\Vaca.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\sources\creeper.cpp" />
     <ClCompile Include="src\sources\Dragon.cpp" />
     <ClCompile Include="src\sources\glad.c" />
+    <ClCompile Include="src\sources\Golem.cpp" />
     <ClCompile Include="src\sources\Kart.cpp" />
     <ClCompile Include="src\sources\MarioCraft.cpp" />
+    <ClCompile Include="src\sources\MobMinecraft.cpp" />
     <ClCompile Include="src\sources\Model.cpp" />
     <ClCompile Include="src\sources\Model3D.cpp" />
     <ClCompile Include="src\sources\ModelManager.cpp" />
@@ -200,6 +205,7 @@
     <ClCompile Include="src\sources\Peach.cpp" />
     <ClCompile Include="src\sources\sound.cpp" />
     <ClCompile Include="src\sources\JumpAnimation.cpp" />
+    <ClCompile Include="src\sources\Vaca.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

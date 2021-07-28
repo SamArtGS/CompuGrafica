@@ -110,6 +110,15 @@
     <ClInclude Include="src\headers\Peach.h">
       <Filter>Archivos de encabezado\Objetos</Filter>
     </ClInclude>
+    <ClInclude Include="src\headers\Vaca.h">
+      <Filter>Archivos de encabezado\Objetos</Filter>
+    </ClInclude>
+    <ClInclude Include="src\headers\MobMinecraft.h">
+      <Filter>Archivos de encabezado\Objetos</Filter>
+    </ClInclude>
+    <ClInclude Include="src\headers\Golem.h">
+      <Filter>Archivos de encabezado\Objetos</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\sources\glad.c">
@@ -149,6 +158,15 @@
       <Filter>Archivos de origen\Objetos</Filter>
     </ClCompile>
     <ClCompile Include="src\sources\Peach.cpp">
+      <Filter>Archivos de origen\Objetos</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sources\Vaca.cpp">
+      <Filter>Archivos de origen\Objetos</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sources\MobMinecraft.cpp">
+      <Filter>Archivos de origen\Objetos</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sources\Golem.cpp">
       <Filter>Archivos de origen\Objetos</Filter>
     </ClCompile>
   </ItemGroup>
