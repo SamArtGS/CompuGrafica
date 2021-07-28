@@ -104,6 +104,12 @@
     <ClInclude Include="src\headers\JumpAnimation.h">
       <Filter>Archivos de encabezado\Objetos</Filter>
     </ClInclude>
+    <ClInclude Include="src\headers\creeper.h">
+      <Filter>Archivos de encabezado\Objetos</Filter>
+    </ClInclude>
+    <ClInclude Include="src\headers\Peach.h">
+      <Filter>Archivos de encabezado\Objetos</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\sources\glad.c">
@@ -137,6 +143,12 @@
       <Filter>Archivos de origen\Objetos</Filter>
     </ClCompile>
     <ClCompile Include="src\sources\JumpAnimation.cpp">
+      <Filter>Archivos de origen\Objetos</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sources\creeper.cpp">
+      <Filter>Archivos de origen\Objetos</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sources\Peach.cpp">
       <Filter>Archivos de origen\Objetos</Filter>
     </ClCompile>
   </ItemGroup>

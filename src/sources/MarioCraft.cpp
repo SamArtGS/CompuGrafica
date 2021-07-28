@@ -11,6 +11,8 @@
 #include "JumpAnimation.h"
 #include "Dragon.h"
 #include "Moneda.h"
+#include "creeper.h"
+#include "Peach.h"
 
 
 // Static declarations
@@ -429,14 +431,6 @@ void MarioCraft::initModels() {
     ->Scale(3.0f, 3.0f, 3.0f);
   models->addModel(steve);
 
-
-  StaticModel* peach = new StaticModel("resources/objects/Peach/Peach.obj");
-  peach
-    ->Init(glm::mat4(1.0f))
-    ->Translate(70.0f, 30.0f, 140.0f)
-    ->Scale(0.5f, 0.5f, 0.5f);
-  models->addModel(peach);
-
   Kart* kart1 = new Kart("resources/objects/Karts/Kart1/kart1.obj");
   kart1
     ->Init(glm::mat4(1.0f))
@@ -527,5 +521,13 @@ void MarioCraft::initModels() {
       ->Scale(5.f, 5.f, 5.f);
     models->addModel(moneda, DYNAMIC);
   }
+  // Creeper -------------------------------------------------------------------
+    //
+  DynamicModel* creeper = new Creeper("resources/objects/Creeper");
+  models->addModel(creeper, DYNAMIC);
 
+  // Peach -------------------------------------------------------------------
+  //
+  DynamicModel* peach = new Peach("resources/objects/Peach");
+  models->addModel(peach, DYNAMIC);
 }
