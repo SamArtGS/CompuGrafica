@@ -185,6 +185,7 @@
     <ClInclude Include="src\headers\ModelManager.h" />
     <ClInclude Include="src\headers\Moneda.h" />
     <ClInclude Include="src\headers\Peach.h" />
+    <ClInclude Include="src\headers\resource.h" />
     <ClInclude Include="src\headers\sound.h" />
     <ClInclude Include="src\headers\StaticModel.h" />
     <ClInclude Include="src\headers\JumpAnimation.h" />
@@ -208,6 +209,12 @@
     <ClCompile Include="src\sources\sound.cpp" />
     <ClCompile Include="src\sources\JumpAnimation.cpp" />
     <ClCompile Include="src\sources\Vaca.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MarioCraft.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\icono.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
