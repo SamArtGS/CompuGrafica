@@ -348,24 +348,24 @@ void MarioCraft::renderModels() {
 void MarioCraft::initModels() {
 
     models = new ModelManager();
-    float altura = 3.5f;
+    float altura = 13.0f;
     float coordenadasCasasToad[11][2] = {
         //Tres a lado de la carretera, alineados, a lado de las gallinas
-        {-100.0f, -40.0f},
-        {-100.0f, -10.0f},
-        {-100.0f,  20.0f},
+        {-10.0f, -50.0f},
+        {-10.0f, -20.0f},
+        {-10.0f,  10.0f},
 
         //2 en medio de la carretera
-        {-20.0f, -85.0f},
-        {-50.0f, -35.0f},
+        { 70.0f, -95.0f},
+        { 40.0f, -45.0f},
 
         //Mini Villa de Champi�ones 6 juntos en cuadr�cula 3x2
-        { 40.0f, -70.0f},
-        { 40.0f, -30.0f},
-        { 40.0f,  10.0f},
-        { 80.0f, -70.0f},
-        { 80.0f, -30.0f},
-        { 80.0f,  10.0f}
+        { 130.0f, -80.0f},
+        { 130.0f, -40.0f},
+        { 130.0f,  0.0f},
+        { 170.0f, -80.0f},
+        { 170.0f, -40.0f},
+        { 170.0f,  0.0f}
     };
 
     float coordenadasCasasMaicra1[2][2] = {
@@ -380,16 +380,11 @@ void MarioCraft::initModels() {
         {60, -400.0f},
         {-100, -350},
         {-170, -320},
-
-
         {-100, -50},
         {-170, -50},
-
         {60, -110},
         {100, -110},
-
         {110, -50},
-        
         {70, -50 },
         {0, -70}
     };
@@ -435,18 +430,18 @@ void MarioCraft::initModels() {
 
     for (int i = 0; i < 11; i++) {
       if(i%2==0){
-        StaticModel* casaToad = new StaticModel("resources/objects/CasaToad/casaToadAzul/casaAzul.obj");
+        StaticModel* casaToad = new StaticModel("resources/objects/CasaToad/casaToadAzul/casatoad.obj");
         casaToad
             ->Init(glm::mat4(1.0f))
             ->Translate(coordenadasCasasToad[i][0], altura, coordenadasCasasToad[i][1])
-            ->Scale(10.0f, 10.0f, 10.0f);
+            ->Scale(7.0f, 7.0f, 7.0f);
         models->addModel(casaToad);
       }else{
-        StaticModel* casaToad = new StaticModel("resources/objects/CasaToad/casaToadRoja/casaRoja.obj");
+        StaticModel* casaToad = new StaticModel("resources/objects/CasaToad/casaToadRoja/casatoad.obj");
         casaToad
             ->Init(glm::mat4(1.0f))
             ->Translate(coordenadasCasasToad[i][0], altura, coordenadasCasasToad[i][1])
-            ->Scale(10.0f, 10.0f, 10.0f);
+            ->Scale(7.0f, 7.0f, 7.0f);
         models->addModel(casaToad);
       }
     }
