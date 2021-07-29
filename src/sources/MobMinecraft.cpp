@@ -161,7 +161,7 @@ void MobMinecraft::caminar() {
 		}
 		
 		auxiliarContador += 0.1f;
-		cout << posicion << "\t" << ruta[posicion][0] << " \t" << ruta[posicion][1] << "\n";
+		//cout << posicion << "\t" << ruta[posicion][0] << " \t" << ruta[posicion][1] << "\n";
 		if ((int)ruta[posicion][1] <= auxiliarContador) {
 			auxiliarContador = 0.0f;
 			

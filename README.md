@@ -35,3 +35,18 @@ Ir a Propiedades de Configuración del Proyecto y colocar las siguientes configu
    - `sfml-system-d.lib`
    - `sfml-window-d.lib`
    - `sfml-audio-d.lib`
+
+
+## Estructura general del proyecto
+
+- dll
+- include
+- lib
+- resources
+- shaders
+- src
+- MarioCraft.sln
+- MarioCraft.vcxproj
+
+
+

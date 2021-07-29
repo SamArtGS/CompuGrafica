@@ -1,12 +1,12 @@
+
+
+#pragma once
 /*-------------------------------------------------------------------*/
 /* ---------------- PROYECTO FINAL: MARIOCRAFT ----------------------*/
 /*-----------------              2021-2          --------------------*/
 /*------------- Alumno: Ricardo Antonio Hernández Torres ------------*/
 /*------------- Alumno: Jorge Cárdenas Cárdenas          ------------*/
 /*------------- Alumno: Samuel Arturo Garrido Sánchez    ------------*/
-
-#pragma once
-
 #include "MarioCraft.h"
 
 
@@ -388,9 +388,10 @@ void MarioCraft::initModels() {
       { 80.0f, 50.0f}
   };
 
-  float coordenadasCasasMaicra2[2][2] = {
-      {-170.0f, 270.0f},
-      {-60.0f,  100.0f}
+  float coordenadasArboles[3][2] = {
+      {20.0f, -300},
+      {-100,  -10.0},
+      {-100, -300}
   };
 
   //Escenario -------------------------------------------
@@ -403,14 +404,15 @@ void MarioCraft::initModels() {
 
   // Arboles
   //
-  StaticModel* arbol = new StaticModel("resources/objects/ArbolMinecraft1/arbol.obj");
-  arbol
-      ->Init(glm::mat4(1.0f))
-      ->Translate(100,10,50)
-      ->Scale(15.0f, 15.0f, 15.0f);
-  models->addModel(arbol);
 
-
+  for (int i = 0; i < 3; i++) {
+      StaticModel* arbol = new StaticModel("resources/objects/ArbolMinecraft1/arbol.obj");
+      arbol
+          ->Init(glm::mat4(1.0f))
+          ->Translate(coordenadasArboles[i][0], 0.0, coordenadasArboles[i][1])
+          ->Scale(15.0f, 15.0f, 15.0f);
+      models->addModel(arbol);
+  }
 
   //Castillo -------------------------------------------
   //
@@ -432,6 +434,29 @@ void MarioCraft::initModels() {
       ->Scale(10.0f, 10.0f, 10.0f);
     models->addModel(casaToad);
   }
+
+
+  StaticModel* casa = new StaticModel("resources/objects/CasaMinecraft2/casa2.obj");
+  casa
+      ->Init(glm::mat4(1.0f))
+      ->Translate(150, 7, 180)
+      ->Scale(35.0f, 35.0f, 35.0f);
+  models->addModel(casa);
+
+  StaticModel* casa2 = new StaticModel("resources/objects/CasaMinecraft1/casa.obj");
+  casa2
+      ->Init(glm::mat4(1.0f))
+      ->Translate(150, 36.2, -180)
+
+      ->Scale(2.0f, 2.0f, 2.0f);
+  models->addModel(casa2);
+
+  StaticModel* casa3 = new StaticModel("resources/objects/CasaMinecraft1/casa.obj");
+  casa3
+      ->Init(glm::mat4(1.0f))
+      ->Translate(-150, 36.2, -180)
+      ->Scale(2.0f, 2.0f, 2.0f);
+  models->addModel(casa3);
 
   // Casas Minecraft // Buscar modelos m�s ligeros o quitar un pocon�n de v�rtices, mucha RAM
   /*for (int i = 0; i < 1; i++) {
@@ -490,8 +515,8 @@ void MarioCraft::initModels() {
       Golem::TipoMovimiento::sixSag);
   golem2
       ->Init(glm::mat4(1.0f))
-      ->Translate(100.0f, 10.0f, 180)
-      ->Scale(0.5f, 0.5f, 0.5f);
+      ->Translate(50.0f, 10.0f, 180)
+      ->Scale(0.3f, 0.3f, 0.3f);
   models->addModel(golem2, DYNAMIC);
   
   
@@ -501,8 +526,8 @@ void MarioCraft::initModels() {
       Golem::TipoMovimiento::sixSag);
   golem3
       ->Init(glm::mat4(1.0f))
-      ->Translate(-170.0f, 10.0f, -130.0f)
-      ->Scale(0.5f, 0.5f, 0.5f);
+      ->Translate(-170.0f, 10.0f, -80)
+      ->Scale(0.3f, 0.3f, 0.3f);
   models->addModel(golem3, DYNAMIC);
 
   DynamicModel* steve = new Golem("resources/objects/Steve",
@@ -511,7 +536,7 @@ void MarioCraft::initModels() {
   steve
       ->Init(glm::mat4(1.0f))
       ->Translate(-150.0f, 10.0f, -110.0f)
-      ->Scale(0.5f, 0.5f, 0.5f);
+      ->Scale(0.3f, 0.3f, 0.3f);
   models->addModel(steve, DYNAMIC);
 
 
