@@ -1,0 +1,17 @@
+# Blender MTL File: 'untitled.blend'
+# Material Count: 1
+
+newmtl Material
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd Diffuse.png
+map_Bump -bm 0.100000 Diffuse_normal.png
+map_Ks Diffuse_specular.png
+map_Ns Diffuse_specular.png
+map_d Diffuse.png
