@@ -434,12 +434,21 @@ void MarioCraft::initModels() {
     //
 
     for (int i = 0; i < 11; i++) {
-        StaticModel* casaToad = new StaticModel("resources/objects/CasaToad/casatoad.obj");
+      if(i%2==0){
+        StaticModel* casaToad = new StaticModel("resources/objects/CasaToad/casaToadAzul/casaAzul.obj");
         casaToad
             ->Init(glm::mat4(1.0f))
             ->Translate(coordenadasCasasToad[i][0], altura, coordenadasCasasToad[i][1])
             ->Scale(10.0f, 10.0f, 10.0f);
         models->addModel(casaToad);
+      }else{
+        StaticModel* casaToad = new StaticModel("resources/objects/CasaToad/casaToadRoja/casaRoja.obj");
+        casaToad
+            ->Init(glm::mat4(1.0f))
+            ->Translate(coordenadasCasasToad[i][0], altura, coordenadasCasasToad[i][1])
+            ->Scale(10.0f, 10.0f, 10.0f);
+        models->addModel(casaToad);
+      }
     }
 
 
