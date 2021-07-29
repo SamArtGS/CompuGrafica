@@ -23,6 +23,7 @@
 #include "Golem.h"
 #include "MobMinecraft.h"
 #include "Vaca.h"
+#include "Lighting.h"
 
 // Static declarations
 vector<Shader*> MarioCraft::shaders;
@@ -303,22 +304,6 @@ void MarioCraft::initSkybox() {
 void MarioCraft::renderLights() {
   int indice = shader_enum::SHADER_CORE_PROGRAM;
   shaders[indice]->use();
-  // Simula la luz del sol.
-  //Setup Advanced Lights
-  shaders[indice]->setVec3("viewPos", camera->Position);
-  shaders[indice]->setVec3("dirLight.direction", lightDirection);
-  shaders[indice]->setVec3("dirLight.ambient", glm::vec3(1.0f, 1.0f, 1.0f)); // Tonalidad del ambiente, modifica las caras menos iluminadas
-  shaders[indice]->setVec3("dirLight.diffuse", glm::vec3(0.0f, 0.0f, 0.0f)); // Color principal de la fuente de luz
-  shaders[indice]->setVec3("dirLight.specular", glm::vec3(1.0f, 1.0f, 1.0f));  // Brillo
-
-  // Fuentes de luz posicionales
-  shaders[indice]->setVec3("pointLight[0].position", lightPosition);
-  shaders[indice]->setVec3("pointLight[0].ambient", glm::vec3(1.0f, 1.0f, 1.0f));
-  shaders[indice]->setVec3("pointLight[0].diffuse", glm::vec3(1.0f, 1.0f, 1.0f));
-  shaders[indice]->setVec3("pointLight[0].specular", glm::vec3(0.0f, 0.0f, 0.0f));
-  shaders[indice]->setFloat("pointLight[0].constant", 0.08f);
-  shaders[indice]->setFloat("pointLight[0].linear", 0.009f); // Que tanto viaja la luz en el ambiente
-  shaders[indice]->setFloat("pointLight[0].quadratic", 0.032f); // Intencidad de la fuente de luz
 
   shaders[indice]->setVec3("pointLight[1].position", glm::vec3(-80.0, 0.0f, 0.0f));
   shaders[indice]->setVec3("pointLight[1].ambient", glm::vec3(1.0f, 0.0f, 0.0f));
@@ -410,6 +395,12 @@ void MarioCraft::initModels() {
       ->Scale(15.0f, 15.0f, 15.0f);
   models->addModel(arbol);
 
+  // SOL Y LUNA ----------------------------------------------------------------
+  //
+  Lighting* lighthing = new Lighting(
+    "resources/objects/SolLuna", shaders[shader_enum::SHADER_CORE_PROGRAM]
+  );
+  models->addModel(lighthing, DYNAMIC);
 
 
   //Castillo -------------------------------------------

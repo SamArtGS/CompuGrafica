@@ -29,6 +29,8 @@ public:
   void updateKeyboardInput();
   static GLFWwindow* window;
 
+  // Camera
+  static Camera* camera;
   // Shaders
   static std::vector<Shader*> shaders;
 
@@ -42,8 +44,6 @@ public:
 
 private:
   // Static variables
-    // Camera
-  static Camera* camera;
   // Variables
     // Window
   

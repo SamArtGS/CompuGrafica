@@ -177,6 +177,7 @@
     <ClInclude Include="src\headers\Golem.h" />
     <ClInclude Include="src\headers\Kart.h" />
     <ClInclude Include="src\headers\libs.h" />
+    <ClInclude Include="src\headers\Lighting.h" />
     <ClInclude Include="src\headers\MarioCraft.h" />
     <ClInclude Include="src\headers\MobMinecraft.h" />
     <ClInclude Include="src\headers\Model.h" />
@@ -196,6 +197,7 @@
     <ClCompile Include="src\sources\glad.c" />
     <ClCompile Include="src\sources\Golem.cpp" />
     <ClCompile Include="src\sources\Kart.cpp" />
+    <ClCompile Include="src\sources\Lighting.cpp" />
     <ClCompile Include="src\sources\MarioCraft.cpp" />
     <ClCompile Include="src\sources\MobMinecraft.cpp" />
     <ClCompile Include="src\sources\Model.cpp" />

@@ -119,6 +119,9 @@
     <ClInclude Include="src\headers\Golem.h">
       <Filter>Archivos de encabezado\Objetos</Filter>
     </ClInclude>
+    <ClInclude Include="src\headers\Lighting.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\sources\glad.c">
@@ -168,6 +171,9 @@
     </ClCompile>
     <ClCompile Include="src\sources\Golem.cpp">
       <Filter>Archivos de origen\Objetos</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sources\Lighting.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

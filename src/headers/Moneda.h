@@ -11,5 +11,6 @@ public:
   void animate();
   void keyboardInput();
   void renderModels();
+  void Render();
 };
 
