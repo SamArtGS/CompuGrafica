@@ -347,124 +347,169 @@ void MarioCraft::renderModels() {
 
 void MarioCraft::initModels() {
 
-  models = new ModelManager();
-  float altura = 3.5f;
-  float coordenadasCasasToad[11][2] = {
-    //Tres a lado de la carretera, alineados, a lado de las gallinas
-    {-100.0f, -40.0f},
-    {-100.0f, -10.0f},
-    {-100.0f,  20.0f},
+    models = new ModelManager();
+    float altura = 3.5f;
+    float coordenadasCasasToad[11][2] = {
+        //Tres a lado de la carretera, alineados, a lado de las gallinas
+        {-100.0f, -40.0f},
+        {-100.0f, -10.0f},
+        {-100.0f,  20.0f},
 
-    //2 en medio de la carretera
-    {-20.0f, -85.0f},
-    {-50.0f, -35.0f},
+        //2 en medio de la carretera
+        {-20.0f, -85.0f},
+        {-50.0f, -35.0f},
 
-    //Mini Villa de Champi�ones 6 juntos en cuadr�cula 3x2
-    { 40.0f, -70.0f},
-    { 40.0f, -30.0f},
-    { 40.0f,  10.0f},
-    { 80.0f, -70.0f},
-    { 80.0f, -30.0f},
-    { 80.0f,  10.0f}
-  };
+        //Mini Villa de Champi�ones 6 juntos en cuadr�cula 3x2
+        { 40.0f, -70.0f},
+        { 40.0f, -30.0f},
+        { 40.0f,  10.0f},
+        { 80.0f, -70.0f},
+        { 80.0f, -30.0f},
+        { 80.0f,  10.0f}
+    };
 
-  float coordenadasCasasMaicra1[2][2] = {
-      {170.0f, 170.0f},
-      { 80.0f, 50.0f}
-  };
+    float coordenadasCasasMaicra1[2][2] = {
+        {170.0f, 170.0f},
+        { 80.0f, 50.0f}
+    };
 
-  float coordenadasArboles[3][2] = {
-      {20.0f, -300},
-      {-100,  -10.0},
-      {-100, -300}
-  };
+    float coordenadasArboles[13][2] = {
+        {20.0f, -300},
+        {-100,  -10.0},
+        {-100, -300},
+        {60, -400.0f},
+        {-100, -350},
+        {-170, -320},
 
-  //Escenario -------------------------------------------
-  //
-  StaticModel* escenario = new StaticModel("resources/objects/Escenario/Mariocraft.obj");
-  escenario
-    ->Init(glm::mat4(1.0f))
-    ->Scale(15.0f, 15.0f, 15.0f);
-  models->addModel(escenario);
 
-  // Arboles
-  //
-  StaticModel* arbol = new StaticModel("resources/objects/ArbolMinecraft1/arbol.obj");
-  arbol
+        {-100, -50},
+        {-170, -50},
+
+        {60, -110},
+        {100, -110},
+
+        {110, -50},
+        
+        {70, -50 },
+        {0, -70}
+    };
+
+    //Escenario -------------------------------------------
+    //
+    StaticModel* escenario = new StaticModel("resources/objects/Escenario/Mariocraft.obj");
+    escenario
+        ->Init(glm::mat4(1.0f))
+        ->Scale(15.0f, 15.0f, 15.0f);
+    models->addModel(escenario);
+
+    // Arboles
+    //
+
+    // SOL Y LUNA ----------------------------------------------------------------
+    //
+    Lighting* lighthing = new Lighting(
+        "resources/objects/SolLuna", shaders[shader_enum::SHADER_CORE_PROGRAM]
+    );
+    models->addModel(lighthing, DYNAMIC);
+
+    for (int i = 0; i < sizeof(coordenadasArboles) / sizeof(coordenadasArboles[0]); i++) {
+        StaticModel* arbol = new StaticModel("resources/objects/ArbolMinecraft1/arbol.obj");
+        arbol
+            ->Init(glm::mat4(1.0f))
+            ->Translate(coordenadasArboles[i][0], 0.0, coordenadasArboles[i][1])
+            ->Scale(15.0f, 15.0f, 15.0f);
+        models->addModel(arbol);
+    }
+
+    //Castillo -------------------------------------------
+    //
+    StaticModel* castillo = new StaticModel("resources/objects/Castillo/castillo.obj");
+    castillo
+        ->Init(glm::mat4(1.0f))
+        ->Translate(15.0f, 54.0f, -245.0f)
+        ->Scale(65.0f, 65.0f, 65.0f);
+    models->addModel(castillo);
+
+    // CasasTOAD -----------------------------------------
+    //
+
+    for (int i = 0; i < 11; i++) {
+        StaticModel* casaToad = new StaticModel("resources/objects/CasaToad/casatoad.obj");
+        casaToad
+            ->Init(glm::mat4(1.0f))
+            ->Translate(coordenadasCasasToad[i][0], altura, coordenadasCasasToad[i][1])
+            ->Scale(10.0f, 10.0f, 10.0f);
+        models->addModel(casaToad);
+    }
+
+
+    StaticModel* casa = new StaticModel("resources/objects/CasaMinecraft2/casa2.obj");
+    casa
+        ->Init(glm::mat4(1.0f))
+        ->Translate(150, 7, 190)
+        ->Scale(30.0f, 30.0f, 30.0f);
+    models->addModel(casa);
+
+    StaticModel* casa2 = new StaticModel("resources/objects/CasaMinecraft1/casa.obj");
+    casa2
+        ->Init(glm::mat4(1.0f))
+        ->Translate(150, 36.2, -180)
+
+        ->Scale(2.0f, 2.0f, 2.0f);
+    models->addModel(casa2);
+
+    StaticModel* casa3 = new StaticModel("resources/objects/CasaMinecraft1/casa.obj");
+    casa3
+        ->Init(glm::mat4(1.0f))
+        ->Translate(-150, 36.2, -180)
+        ->Scale(2.0f, 2.0f, 2.0f);
+    models->addModel(casa3);
+
+
+    StaticModel* casa4 = new StaticModel("resources/objects/CasaMinecraft4/fortaleza.obj");
+    casa4
+        ->Init(glm::mat4(1.0f))
+        ->Translate(160, 9.7, 120)
+        ->Scale(5.5f, 5.5, 5.5);
+    models->addModel(casa4);
+
+    StaticModel* casaFortaleza = new StaticModel("resources/objects/CasaMinecraft4/fortaleza.obj");
+    casaFortaleza
+        ->Init(glm::mat4(1.0f))
+        ->Translate(-70, 9.7, -45)
+        ->Rotate(90, 0, 1,0)
+        ->Scale(5.5f, 5.5, 5.5);
+    models->addModel(casaFortaleza);
+
+
+    StaticModel* casa5 = new StaticModel("resources/objects/CasaMinecraft3/casa.obj");
+    casa5
+        ->Init(glm::mat4(1.0f))
+        ->Translate(-160, 2, -50)
+        ->Scale(4.0f, 4.0f, 4.0f);
+    models->addModel(casa5);
+
+    StaticModel* casa55 = new StaticModel("resources/objects/CasaMinecraft3/casa.obj");
+    casa55
+        ->Init(glm::mat4(1.0f))
+        ->Translate(-35, 2, 75)
+      ->Scale(4.0f, 4.0f, 4.0f);
+  models->addModel(casa55);
+
+
+  StaticModel* casa6 = new StaticModel("resources/objects/CasaMinecraft3/casa.obj");
+  casa6
       ->Init(glm::mat4(1.0f))
-      ->Translate(100,10,50)
-      ->Scale(15.0f, 15.0f, 15.0f);
-  models->addModel(arbol);
+      ->Translate(60, 2, 190)
+      ->Scale(4.0f, 4.0f, 4.0f);
+  models->addModel(casa6);
 
-  // SOL Y LUNA ----------------------------------------------------------------
-  //
-  Lighting* lighthing = new Lighting(
-    "resources/objects/SolLuna", shaders[shader_enum::SHADER_CORE_PROGRAM]
-  );
-  models->addModel(lighthing, DYNAMIC);
-
-  for (int i = 0; i < 3; i++) {
-      StaticModel* arbol = new StaticModel("resources/objects/ArbolMinecraft1/arbol.obj");
-      arbol
-          ->Init(glm::mat4(1.0f))
-          ->Translate(coordenadasArboles[i][0], 0.0, coordenadasArboles[i][1])
-          ->Scale(15.0f, 15.0f, 15.0f);
-      models->addModel(arbol);
-  }
-
-  //Castillo -------------------------------------------
-  //
-  StaticModel* castillo = new StaticModel("resources/objects/Castillo/castillo.obj");
-  castillo
-    ->Init(glm::mat4(1.0f))
-    ->Translate(15.0f, 54.0f, -245.0f)
-    ->Scale(65.0f, 65.0f, 65.0f);
-  models->addModel(castillo);
-
-  // CasasTOAD -----------------------------------------
-  //
-
-  for (int i = 0; i < 11; i++) {
-    StaticModel* casaToad = new StaticModel("resources/objects/CasaToad/casatoad.obj");
-    casaToad
+  StaticModel* casa7 = new StaticModel("resources/objects/CasaMinecraft3/casa.obj");
+  casa7
       ->Init(glm::mat4(1.0f))
-      ->Translate(coordenadasCasasToad[i][0], altura, coordenadasCasasToad[i][1])
-      ->Scale(10.0f, 10.0f, 10.0f);
-    models->addModel(casaToad);
-  }
-
-
-  StaticModel* casa = new StaticModel("resources/objects/CasaMinecraft2/casa2.obj");
-  casa
-      ->Init(glm::mat4(1.0f))
-      ->Translate(150, 7, 180)
-      ->Scale(35.0f, 35.0f, 35.0f);
-  models->addModel(casa);
-
-  StaticModel* casa2 = new StaticModel("resources/objects/CasaMinecraft1/casa.obj");
-  casa2
-      ->Init(glm::mat4(1.0f))
-      ->Translate(150, 36.2, -180)
-
-      ->Scale(2.0f, 2.0f, 2.0f);
-  models->addModel(casa2);
-
-  StaticModel* casa3 = new StaticModel("resources/objects/CasaMinecraft1/casa.obj");
-  casa3
-      ->Init(glm::mat4(1.0f))
-      ->Translate(-150, 36.2, -180)
-      ->Scale(2.0f, 2.0f, 2.0f);
-  models->addModel(casa3);
-
-  // Casas Minecraft // Buscar modelos m�s ligeros o quitar un pocon�n de v�rtices, mucha RAM
-  /*for (int i = 0; i < 1; i++) {
-      StaticModel* casa = new StaticModel("resources/objects/CasaMinecraft1/casa.obj");
-      casa
-          ->Init(glm::mat4(1.0f))
-          ->Translate(coordenadasCasasMaicra1[i][0], 30.0f, coordenadasCasasMaicra1[i][1])
-          ->Scale(2.0f, 2.0f, 2.0f);
-      models->addModel(casa);
-  }*/
+      ->Translate(100, 2, 190)
+      ->Scale(4.0f, 4.0f, 4.0f);
+  models->addModel(casa7);
 
   Kart* kart1 = new Kart("resources/objects/Karts/Kart1/kart1.obj");
   kart1
@@ -502,8 +547,8 @@ void MarioCraft::initModels() {
       Golem::TipoMovimiento::sixSag);
   golem
       ->Init(glm::mat4(1.0f))
-      ->Translate(110.0f, 10.0f, -150.0f)
-      ->Scale(0.5f, 0.5f, 0.5f);
+      ->Translate(140.0f, 10.0f, -110.0f)
+      ->Scale(0.3f, 0.3f, 0.3f);
   models->addModel(golem, DYNAMIC);
 
 
@@ -513,7 +558,7 @@ void MarioCraft::initModels() {
       Golem::TipoMovimiento::sixSag);
   golem2
       ->Init(glm::mat4(1.0f))
-      ->Translate(50.0f, 10.0f, 180)
+      ->Translate(50.0f, 10.0f, 150)
       ->Scale(0.3f, 0.3f, 0.3f);
   models->addModel(golem2, DYNAMIC);
   
@@ -524,18 +569,11 @@ void MarioCraft::initModels() {
       Golem::TipoMovimiento::sixSag);
   golem3
       ->Init(glm::mat4(1.0f))
-      ->Translate(-170.0f, 10.0f, -80)
+      ->Translate(-170.0f, 10.0f, -100)
       ->Scale(0.3f, 0.3f, 0.3f);
   models->addModel(golem3, DYNAMIC);
 
-  DynamicModel* steve = new Golem("resources/objects/Steve",
-      Golem::Tipo::Antropomorfico,
-      Golem::TipoMovimiento::sixSag);
-  steve
-      ->Init(glm::mat4(1.0f))
-      ->Translate(-150.0f, 10.0f, -110.0f)
-      ->Scale(0.3f, 0.3f, 0.3f);
-  models->addModel(steve, DYNAMIC);
+ 
 
 
   // TOAD -------------------------------------------------------------------
