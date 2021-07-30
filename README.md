@@ -1,5 +1,5 @@
 <p>
-  <img src="img/icono.png" align="right"  width="40" height="40" />
+  <img src="img/icono.png" align="right"  width="60" height="60" />
 </p>
 
 
@@ -181,3 +181,25 @@ Se implementó Jira utilizando un enfoque de metodologías ágiles para realizar
 ![](img/scr2.png)
 
 CRONOGRAMA: [LINK DE DRIVE](https://drive.google.com/file/d/12qRsRaWpavHYcGm8vWarMVYnLSACj_VJ/view?usp=sharing)
+
+
+### Costos del proyecto 
+
+- Estimación de costo por modelo: $30 usd x 20 = $ 600 usd
+- Salario de modelador: $1500 usd x 1 = $1500 usd 
+- Salario de desarrollador: $1200 usd x 2 = $2400 usd
+- Licencia de 3DSMax:$1700 usd x 3 año = $ 5100 usd
+- Licencia de Visual Studio: $100 x 3 usd = $300 usd
+- Luz eléctrica promedio: $50 x3 usd = $150 usd
+- Gasto de equipo de cómputo: $1500 usd x computadora (3) = $4500 usd
+- Internet: $30 x 3 = $90 usd
+- GitHub Pro: $5 x 3 = $15 usd
+- Jira Software: $100
+
+### Total
+**$14755 x 1.3 de ganancia  = $19181.5 usd**
+
+### $380,931.19 MXN
+
+
+
