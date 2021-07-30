@@ -75,6 +75,7 @@ Ir a Propiedades de Configuración del Proyecto y colocar las siguientes configu
 
 
 ### Estructura general del proyecto
+El proyecto fue generado utilizando el paradigma Orientado a Objetos de tal manera que cada elemento colocado en pantalla es una clase y algunos heredan atributos y métodos para que el proyecto sea más escalable y mejor estructurado.
 
 - **dll:** Bibliotecas de Enlaces Dinámicos
 - **include:** Bibliotecas generales del proyecto (headers)
@@ -82,9 +83,26 @@ Ir a Propiedades de Configuración del Proyecto y colocar las siguientes configu
 - **resources:** Modelos, imágenes y sonidos.
 - **shaders:** Scripts del GPU
 - **src:** Archivos fuente
-  - **headers:** Encabezados de las clases.
-  - **sources:** Definición de las clases del proyecto.
-  - **main.cpp:** Archivo principal, instancia las clases. 
+  - **headers:** Definición de las clases del proyecto.
+    - Model3D.h  (Clase general de todos los modelos, mejora las transformaciones, hereda de Model.h)
+    - StaticModel.h (Clase para objetos estáticos, heredada de Model3D)
+    - DynamicModel.h (Clase para objetos dinámicos, heredada de Model3D)
+    - sound.h (Clase para el audio)
+    - MarioCraft.h (Encabezado general del objeto del plano)
+    - ModelManager. (Controlador de los modelos, para mandarlos al shader)
+    - Lightning.h (Clase de la luz diurna)
+    - Camera.h (Clase de la cámara)
+    - Golem.h
+    - Dragon.h
+    - Kart.h
+    - Peach.h
+    - JumpAnimation.h (Clase para saltos generales)
+    - MobMinecraft (Clase general de mobs de minecraft, para caminar solamente)
+    - Vaca.h
+    - Creeper.h
+    - Moneda.h
+  - **sources:** Contenido de las clases del proyecto.
+  - **main.cpp:** Archivo principal, instancia las clases que conforman el proyecto. 
 - **MarioCraft.sln:** Archivo de solución
 - **MarioCraft.vcxproj:** Archivo del proyecto.
 
