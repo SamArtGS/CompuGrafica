@@ -121,7 +121,7 @@ El proyecto fue generado utilizando el paradigma Orientado a Objetos de tal mane
    -  Para realizar la animación de carrera de autos:
       -  Barra espaciadora: Iniciar animación (se reproduce sonido).
 
-### Animaciones implementadas
+### Animaciones implementadas (Más de 5 estados, no DAEs)
 
 - 1: **Dragón volando y lanzando bolas de fuego**
 
