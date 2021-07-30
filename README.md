@@ -1,11 +1,29 @@
 # MarioCraft
 
-## Configuraciones de Visual Studio
+## INSTRUCCIONES PARA COMPILAR:
+
+**PASO 1:**
+
+Abrir el proyecto de Visual Studio (MarioCraft.vcxproj)
+
+**PASO 2:**
+
+**SELECCIONAR ARQUITECTURA x86**, si se elige x64 habrá un error inicial.
+
+**PASO 3:**
+
+Abrir las propiedades del proyecto:
+
+-  En **DEPURACIÓN** hacer click en **ENTORNO**
+   - Hacer click en editar y agregar la siguiente entrada:
+   
+   `PATH=$(ProjectDir)dll`
+
+![]("img/Imagen1.png")
+
+### En caso de existir un error al compilar, asegurarse que se encuentren las siguientes configuraciones. 
 
 Ir a Propiedades de Configuración del Proyecto y colocar las siguientes configuraciones:
-
--  En Depuracion, Entorno hacer click en editar y agregar la siguiente entrada:
-   - `PATH=$(ProjectDir)dll`
 
 -  En C/C++ >> General, en la opción Dirección de inclusión adicicionales hacer click en editar y agregar en el mismo orden las siguientes entradas:
    - `$(SolutionDir)src\headers`
