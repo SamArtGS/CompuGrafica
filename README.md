@@ -176,8 +176,8 @@ Arrangement Copyright Nintendo
 
 #### Jira
 
-![](img/.png)
+Se implementó Jira utilizando un enfoque de metodologías ágiles para realizar el proyecto
 
-#### GitHub
+![](img/scr2.png)
 
-![](img/.png)
+CRONOGRAMA: [LINK DE DRIVE](https://drive.google.com/file/d/12qRsRaWpavHYcGm8vWarMVYnLSACj_VJ/view?usp=sharing)
