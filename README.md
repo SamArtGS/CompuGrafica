@@ -19,7 +19,7 @@ Abrir las propiedades del proyecto:
    
    `PATH=$(ProjectDir)dll`
 
-![]("img/Imagen1.png")
+![](img/Imagen1.png)
 
 ### En caso de existir un error al compilar, asegurarse que se encuentren las siguientes configuraciones. 
 
