@@ -9,6 +9,9 @@
 - Ricardo Antonio Hernández Torres
 - Samuel Arturo Garrido Sánchez
 
+### Manual técnico
+
+Para consultar el manual técnico [pique aquí](https://github.com/SamArtGS/MarioCraft)
 
 ### Ejecutable
 
@@ -126,6 +129,7 @@ El proyecto fue generado utilizando el paradigma Orientado a Objetos de tal mane
 - 1: **Dragón volando y lanzando bolas de fuego**
 
 ![](img/Imagen2.png)
+
 
 - 2: **Peach perseguida por Creeper**
 
